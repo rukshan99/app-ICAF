@@ -1,5 +1,15 @@
-# app-ICAF
-Frontend of the conference management tool for ICAF
+# International Conference on Application Frameworks
+#### React JS frontend of the conference management tool for ICAF
+
+## Getting Started
+
+### `git clone https://github.com/rukshan99/app-ICAF.git`
+
+Clone the repository to your local space.
+
+### `npm install`
+
+Install the dependencies in the local node_modules folder.
 
 ### `npm start`
 

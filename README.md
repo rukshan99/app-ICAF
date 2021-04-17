@@ -1,5 +1,5 @@
-# app-ICAF
-Frontend of the conference management tool for ICAF
+# International Conference on Application Frameworks
+## Frontend of the conference management tool for ICAF
 
 ### `npm start`
 

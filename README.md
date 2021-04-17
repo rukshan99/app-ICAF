@@ -1,5 +1,5 @@
 # International Conference on Application Frameworks
-#### Frontend of the conference management tool for ICAF
+#### React JS rontend of the conference management tool for ICAF
 
 ## Getting Started
 

@@ -13,3 +13,13 @@
   .authentication form {
     margin-bottom: 1rem;
   }
+
+  .dropbtn {
+    background-color: #c1c1c19d;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  

@@ -1,5 +1,12 @@
 import React, { useState, useContext } from 'react';
 
+//import Dropdown from 'react-dropdown';
+//import 'react-dropdown/style.css';
+
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown'
+
 import Input from '../../Shared/FormElements/Input';
 import Button from '../../Shared/FormElements/Button';
 import Card from '../../Shared/UIElements/Card';
@@ -10,12 +17,18 @@ import { useForm } from '../../Shared/hooks/form-hooks';
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../../Shared/Util/validators';
 import { useHttpClient } from '../../Shared/hooks/http-hook';
 import { AuthContext } from '../../Shared/context/auth-context';
+
 import './SignIn.css';
 
 const SignIn = () => {
     const auth = useContext(AuthContext);
+    const [type, setType] = useState("Attendee");
     const [isSignInMode, setIsSignInMode] = useState(true);
+    const [isAttendee, setIsAttendee] = useState(true);
+    const [isResearcher, setIsResearcher] = useState(false);
+    const [isWorkshopPresenter, setIsWorksopPresenter] = useState(false);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
+    
 
     const [formState, inputHandler, setFormData] = useForm(
         {
@@ -90,6 +103,27 @@ const SignIn = () => {
         }
     };
     
+    const typeSelectHandler = (value) => {
+        
+        setType(value);
+        if(value==="Attendee") {
+            setIsAttendee(true);
+            setIsResearcher(false);
+            setIsWorksopPresenter(false);
+        }
+        else if(value==="Researcher") {
+            setIsAttendee(false);
+            setIsResearcher(true);
+            setIsWorksopPresenter(false);
+        }
+        else if(value==="Workshop Presenter") {
+            setIsAttendee(false);
+            setIsResearcher(false);
+            setIsWorksopPresenter(true);
+        }
+       // console.log(value);
+    };
+
     return (
         <React.Fragment>
         <ErrorModal error={error} onClear={clearError}/>    
@@ -127,6 +161,28 @@ const SignIn = () => {
                     errorText="Password should be at least 6 characters long." 
                     onInput={inputHandler}
                 />
+                {!isSignInMode && formState.isValid && (<p style={{fontWeight: "bold"}}>Type</p>)}
+                {!isSignInMode && formState.isValid && (
+                    <DropdownButton
+                    className="dropbtn"
+                    alignCenter
+                    title={type} 
+                    id="dropdown-menu-align-right"
+                    onSelect={typeSelectHandler}
+                      >
+                          
+                            <Dropdown.Item eventKey="Attendee">Attendee</Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item eventKey="Researcher">Researcher</Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item eventKey="Workshop Presenter">Workshop Presenter</Dropdown.Item>
+
+                    </DropdownButton>
+                )}
+                {!isSignInMode && formState.isValid && (<br />)}
+                {isAttendee && !isSignInMode && formState.isValid && (<p>Pay the price!!!</p>)}
+                {isResearcher && !isSignInMode && formState.isValid && (<p>Upload the research paper!!!</p>)}
+                {isWorkshopPresenter && !isSignInMode && formState.isValid && (<p>Upload the workshop proposal!!!</p>)}
                 <Button type="submit" disabled={!formState.isValid}>{isSignInMode ? 'Sign in' : 'Sign up'}</Button>
             </form>
             <Button inverse onClick={switchModeHandler}>{isSignInMode ? 'Sign up' : 'Sign in'}</Button>

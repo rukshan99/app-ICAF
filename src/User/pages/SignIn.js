@@ -12,6 +12,7 @@ import Button from '../../Shared/FormElements/Button';
 import Card from '../../Shared/UIElements/Card';
 import ErrorModal from '../../Shared/UIElements/ErrorModal';
 import LoadingSpinner from '../../Shared/UIElements/LoadingSpinner';
+import FileUpload from '../file-upload/file-upload';
 
 import { useForm } from '../../Shared/hooks/form-hooks';
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../../Shared/Util/validators';
@@ -181,8 +182,8 @@ const SignIn = () => {
                 )}
                 {!isSignInMode && formState.isValid && (<br />)}
                 {isAttendee && !isSignInMode && formState.isValid && (<p>Pay the price!!!</p>)}
-                {isResearcher && !isSignInMode && formState.isValid && (<p>Upload the research paper!!!</p>)}
-                {isWorkshopPresenter && !isSignInMode && formState.isValid && (<p>Upload the workshop proposal!!!</p>)}
+                {isResearcher && !isSignInMode && formState.isValid && (<FileUpload />)}
+                {isWorkshopPresenter && !isSignInMode && formState.isValid && (<FileUpload />)}
                 <Button type="submit" disabled={!formState.isValid}>{isSignInMode ? 'Sign in' : 'Sign up'}</Button>
             </form>
             <Button inverse onClick={switchModeHandler}>{isSignInMode ? 'Sign up' : 'Sign in'}</Button>

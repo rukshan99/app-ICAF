@@ -13,6 +13,7 @@ import Card from '../../Shared/UIElements/Card';
 import ErrorModal from '../../Shared/UIElements/ErrorModal';
 import LoadingSpinner from '../../Shared/UIElements/LoadingSpinner';
 import FileUpload from '../file-upload/file-upload';
+import BankForm from '../payment/BankForm';
 
 import { useForm } from '../../Shared/hooks/form-hooks';
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../../Shared/Util/validators';
@@ -181,7 +182,7 @@ const SignIn = () => {
                     </DropdownButton>
                 )}
                 {!isSignInMode && formState.isValid && (<br />)}
-                {isAttendee && !isSignInMode && formState.isValid && (<p>Pay the price!!!</p>)}
+                {isAttendee && !isSignInMode && formState.isValid && (<h4>Registration fee is RS. 1000.00</h4>) &&(<BankForm />)}
                 {isResearcher && !isSignInMode && formState.isValid && (<FileUpload />)}
                 {isWorkshopPresenter && !isSignInMode && formState.isValid && (<FileUpload />)}
                 <Button type="submit" disabled={!formState.isValid}>{isSignInMode ? 'Sign in' : 'Sign up'}</Button>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Progress} from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './file-upload.css';
 
 const FileUpload = () => {
     

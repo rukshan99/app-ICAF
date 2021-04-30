@@ -11,7 +11,7 @@ const NavLinks = props => {
         return (
             <ul className="nav-links">
       <li>
-        <NavLink to="/" exact>
+        <NavLink to="/dash" exact>
           Admin
         </NavLink>
       </li>

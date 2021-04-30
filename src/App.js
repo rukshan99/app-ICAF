@@ -1,25 +1,42 @@
 import React, { useState, useCallback } from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
+
+
 import MainNavigation from './Shared/Navigation/MainNavigation';
 import SignIn from './User/pages/SignIn';
+import Sidebar from './Components/sidebar/Sidebar';
+
 
 const App = () => {
     const [isSignedIn, setIsSignedIn] = useState(false);
     const [userId, setUserId] = useState(false);
-
-    const [sidebarOpen, setSideBarOpen] = useState(false);
-
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     let routes;
 
-    const openSideBar = () => {
-      setSideBarOpen(true);
-    }
-
-    const closeSideBar = () => {
-      setSideBarOpen(false);
-    }
   
+  
+    const openSidebar = () => {
+        setSidebarOpen(true);
+      };
+      
+    const closeSidebar = () => {
+        setSidebarOpen(false);
+      };
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
     const signIn = useCallback((uid) => {
       setIsSignedIn(true);
       setUserId(uid);
@@ -39,12 +56,13 @@ const App = () => {
       );
 
 
-
     return (
         <Router>
             <MainNavigation />
+            
+            <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar}/>
+
             <main>{routes}</main>
-            <h1>React Js</h1>
         </Router>
     );
 };

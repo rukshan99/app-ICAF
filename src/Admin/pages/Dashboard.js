@@ -1,29 +1,32 @@
-import React, { useState } from "react";
-import "./Dashboard.css"
+import React, { useState } from 'react';
+import Sidebar from '../../Components/sidebar/Sidebar';
+import Main from '../../Components/main/Main';
+import './Dashboard.css';
 
-import Main from "../../Components/main/Main";
-import Sidebar from "../../Components/sidebar/Sidebar"
+const Dasboard = () => {
 
 
+const [sidebarOpen, setSidebarOpen] = useState(false);
 
 
-const Dashboard = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const openSidebar = () => {
+const openSidebar = () => {
     setSidebarOpen(true);
   };
   
-  const closeSidebar = () => {
+const closeSidebar = () => {
     setSidebarOpen(false);
   };
 
-  return (
-    <div className="container">
-      <Main />
-      <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar}/>
-    </div>
-  );
-};
 
-export default Dashboard;
+
+  return(
+      <div className='container'>
+          <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar}/>
+          <Main />
+      </div>
+    
+  )
+
+}
+
+export default Dasboard;

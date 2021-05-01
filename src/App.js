@@ -5,36 +5,20 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 
 import MainNavigation from './Shared/Navigation/MainNavigation';
 import SignIn from './User/pages/SignIn';
-import Sidebar from './Components/sidebar/Sidebar';
+import Dasboard from './Admin/pages/Dashboard';
 
 
 const App = () => {
     const [isSignedIn, setIsSignedIn] = useState(false);
     const [userId, setUserId] = useState(false);
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+    
     let routes;
 
   
   
-    const openSidebar = () => {
-        setSidebarOpen(true);
-      };
-      
-    const closeSidebar = () => {
-        setSidebarOpen(false);
-      };
+    
     
       
-
-
-
-
-
-
-
-
-
-
 
 
     const signIn = useCallback((uid) => {
@@ -51,6 +35,9 @@ const App = () => {
           <Route path="/auth">
                 <SignIn />
           </Route>
+          <Route path="/admin">
+                <Dasboard />
+          </Route>
           <Redirect to="/" />
         </Switch>
       );
@@ -59,9 +46,6 @@ const App = () => {
     return (
         <Router>
             <MainNavigation />
-            
-            <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar}/>
-
             <main>{routes}</main>
         </Router>
     );

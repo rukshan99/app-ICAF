@@ -1,6 +1,8 @@
 import React from "react";
 import "./Main.css";
 import hello from "../../assets/hello.png";
+import Chart from "../charts/chart";
+
 
 
 
@@ -55,27 +57,27 @@ const Main = () => {
         </div>
 
 
-        {/* <div className="charts">
+
+        <div className="charts">
           <div className="charts__left">
             <div className="charts__left__title">
               <div>
                 <h1>daily Reports</h1>
-                <p>Researchs</p>
+                <p>Cupertino, California, USA</p>
               </div>
-              <i className="fa fa-files-o"></i>
+              <i className="fa fa-usd"></i>
             </div>
             <Chart />
           </div>
-
-
           <div className="charts__right">
             <div className="charts__right__title">
               <div>
                 <h1>daily Reports</h1>
-                <p>Researchs</p>
+                <p>Cupertino, California, USA</p>
               </div>
-              <i className="fa fa-files-o"></i>
-            </div> */}
+              <i className="fa fa-usd"></i>
+            </div>
+
 
 
             <div className="charts__right__cards">
@@ -103,9 +105,9 @@ const Main = () => {
 
           </div>
 
-        
+          </div>
 
-      
+          </div>
 
     </main>
 

@@ -36,22 +36,23 @@ const BankForm = () => {
 
     const paymentSubmitHandler = async event => {
         event.preventDefault();
-        try{
-            const responseData = await sendRequest(
-                '', //Add link to backend later 'http://localhost:5000/api/.....'
-                'POST', 
-                JSON.stringify({
-                    cardNo: formState.inputs.cardNo.value,
-                    expDate: formState.inputs.expDate.value,
-                    cvv: formState.inouts.cvv.value
-                }),
-                {
-                    'Content-Type': 'application/json'
-                }
-            );
-    
-            //auth.SignIn(responseData.user.id); 
-        } catch (err) {}
+        toast.success('Payment success');
+        // try{
+        //     const responseData = await sendRequest(
+        //         '', //Add link to backend later 'http://localhost:5000/api/.....'
+        //         'POST', 
+        //         JSON.stringify({
+        //             cardNo: formState.inputs.cardNo.value,
+        //             expDate: formState.inputs.expDate.value,
+        //             cvv: formState.inouts.cvv.value
+        //         }),
+        //         {
+        //             'Content-Type': 'application/json'
+        //         }
+        //     );
+        //     toast.success('Payment success');
+        //     //auth.SignIn(responseData.user.id); 
+        // } catch (err) {}
     };
     
 
@@ -59,7 +60,7 @@ const BankForm = () => {
         <React.Fragment>
         <ErrorModal error={error} onClear={clearError}/>  
         {isLoading && <LoadingSpinner asOverlay/>}  
-            <form onSubmit={paymentSubmitHandler}>
+            <form> {/* onSubmit={paymentSubmitHandler} */}
                 <Input 
                         id="cardNo"
                         element="input" 
@@ -87,6 +88,8 @@ const BankForm = () => {
                         errorText="Please enter the cvv." 
                         onInput={inputHandler}
                     />
+                    <button onClick={toast.success('Payment successful')}>Pay</button>
+                    {/*<Button type="submit" disabled={!formState.isValid}>Pay</Button>*/}
             </form>
         </React.Fragment>
     );

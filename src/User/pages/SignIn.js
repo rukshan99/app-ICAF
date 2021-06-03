@@ -3,7 +3,6 @@ import React, { useState, useContext } from 'react';
 //import Dropdown from 'react-dropdown';
 //import 'react-dropdown/style.css';
 
-//import 'bootstrap/dist/css/bootstrap.min.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 
@@ -12,13 +11,14 @@ import Button from '../../Shared/FormElements/Button';
 import Card from '../../Shared/UIElements/Card';
 import ErrorModal from '../../Shared/UIElements/ErrorModal';
 import LoadingSpinner from '../../Shared/UIElements/LoadingSpinner';
-import FileUpload from '../file-upload/file-upload';
+import DocumentUpload from '../uploadDocs/uploadDocs';
 import BankForm from '../payment/BankForm';
 
 import { useForm } from '../../Shared/hooks/form-hooks';
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../../Shared/Util/validators';
 import { useHttpClient } from '../../Shared/hooks/http-hook';
 import { AuthContext } from '../../Shared/context/auth-context';
+import { document } from '../uploadDocs/uploadDocs';
 
 import './SignIn.css';
 
@@ -73,7 +73,7 @@ const SignIn = () => {
         if(isSignInMode) {
             try{
                 const responseData = await sendRequest(
-                    '', //Add link to backend later 'http://localhost:5000/api/.....'
+                    'http://localhost:4000/auth',
                     'POST', 
                     JSON.stringify({
                         email: formState.inputs.email.value,
@@ -89,12 +89,14 @@ const SignIn = () => {
         } else {
             try {
                 const responseData = await sendRequest(
-                    '', //Add link to backend later 'http://localhost:5000/api/.....'
+                    'http://localhost:4000/auth',
                     'POST',
                     JSON.stringify({
                         name: formState.inputs.name.value,
                         email: formState.inputs.email.value,
-                        password: formState.inputs.password.value
+                        password: formState.inputs.password.value,
+                        role: isAttendee ? "Attendee" : (isResearcher ? "Researcher" : "Workshop Presenter"),
+                        document
                     }),
                     {
                         'Content-Type': 'application/json',
@@ -181,10 +183,11 @@ const SignIn = () => {
 
                     </DropdownButton>
                 )}
-                {!isSignInMode && formState.isValid && (<br />)}
-                {isAttendee && !isSignInMode && formState.isValid && (<h4>Registration fee is RS. 1000.00</h4>) &&(<BankForm />)}
-                {isResearcher && !isSignInMode && formState.isValid && (<FileUpload />)}
-                {isWorkshopPresenter && !isSignInMode && formState.isValid && (<FileUpload />)}
+                {!isSignInMode && formState.isValid && (<br />)} 
+                {isAttendee && !isSignInMode && formState.isValid &&(<p>Registration fee is RS. 1000.00/=</p>)}
+                {isAttendee && !isSignInMode && formState.isValid &&(<BankForm />)}
+                {(isResearcher || isWorkshopPresenter) && !isSignInMode && formState.isValid && (<DocumentUpload />)}
+                {(isResearcher || isWorkshopPresenter) && !isSignInMode && formState.isValid && (<br />)}
                 <Button type="submit" disabled={!formState.isValid}>{isSignInMode ? 'Sign in' : 'Sign up'}</Button>
             </form>
             <Button inverse onClick={switchModeHandler}>{isSignInMode ? 'Sign up' : 'Sign in'}</Button>

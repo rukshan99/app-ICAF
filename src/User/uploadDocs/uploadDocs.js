@@ -47,16 +47,19 @@ class DocumentUpload extends Component {
 
   render() {
     return (
-        <div className="image-container">
-          <div className="process">
-            <h4 className="process__heading">Document Upload</h4>
-            <div className="process__upload-btn">
+      <React.Fragment>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="undefined" crossorigin="anonymous"></script>
+        <div>
+          <div>
+            <h5 className="process__heading">Document Upload</h5>
+            <small class="form-text text-muted">Researchers/Workshop Presenters need to upload the document.</small><br />
+            <div>
               <FileBase type="file" multiple={false} onDone={this.getBaseFile.bind(this)} />
-            </div>
-            <iframe src={this.state.baseDoc} alt="upload-document" className="process__image" />
+            </div><br />
+            <iframe src={this.state.baseDoc} alt="upload-document" className="process__image" width="100%" height="350" scrolling="no" frameBorder="0" allowFullScreen/>
           </div>
         </div>
-
+        </React.Fragment>
     );
   }
 }

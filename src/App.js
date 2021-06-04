@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
 import MainNavigation from './Shared/Navigation/MainNavigation';
+import ResearchPaper from './User/pages/ResearchPaper';
 import SignIn from './User/pages/SignIn';
 
 const App = () => {
@@ -22,6 +23,9 @@ const App = () => {
         <Switch>
           <Route path="/auth">
                 <SignIn />
+          </Route>
+          <Route path="/user11/research">
+                <ResearchPaper />
           </Route>
           <Redirect to="/" />
         </Switch>

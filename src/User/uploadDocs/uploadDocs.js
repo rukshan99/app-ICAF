@@ -53,7 +53,7 @@ class DocumentUpload extends Component {
             <div className="process__upload-btn">
               <FileBase type="file" multiple={false} onDone={this.getBaseFile.bind(this)} />
             </div>
-            <img src={this.state.baseDoc} alt="upload-document" className="process__image" />
+            <iframe src={this.state.baseDoc} alt="upload-document" className="process__image" />
           </div>
         </div>
 
@@ -61,6 +61,6 @@ class DocumentUpload extends Component {
   }
 }
 
-export {document};
+export { document };
 
 export default DocumentUpload;

@@ -1,8 +1,5 @@
 import React, { useState, useContext } from 'react';
 
-//import Dropdown from 'react-dropdown';
-//import 'react-dropdown/style.css';
-
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 
@@ -19,19 +16,21 @@ import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../../S
 import { useHttpClient } from '../../Shared/hooks/http-hook';
 import { AuthContext } from '../../Shared/context/auth-context';
 import { document } from '../uploadDocs/uploadDocs';
+import { paymentForm }  from '../payment/BankForm';
 
 import './SignIn.css';
 
 const SignIn = () => {
     const auth = useContext(AuthContext);
+
     const [type, setType] = useState("Attendee");
     const [isSignInMode, setIsSignInMode] = useState(true);
     const [isAttendee, setIsAttendee] = useState(true);
     const [isResearcher, setIsResearcher] = useState(false);
     const [isWorkshopPresenter, setIsWorksopPresenter] = useState(false);
+
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     
-
     const [formState, inputHandler, setFormData] = useForm(
         {
             email: {
@@ -88,6 +87,7 @@ const SignIn = () => {
             } catch (err) {}
         } else {
             try {
+                console.log(paymentForm);
                 const responseData = await sendRequest(
                     'http://localhost:4000/auth',
                     'POST',
@@ -96,7 +96,8 @@ const SignIn = () => {
                         email: formState.inputs.email.value,
                         password: formState.inputs.password.value,
                         role: isAttendee ? "Attendee" : (isResearcher ? "Researcher" : "Workshop Presenter"),
-                        document
+                        document,
+                        paymentForm
                     }),
                     {
                         'Content-Type': 'application/json',
@@ -125,7 +126,6 @@ const SignIn = () => {
             setIsResearcher(false);
             setIsWorksopPresenter(true);
         }
-       // console.log(value);
     };
 
     return (

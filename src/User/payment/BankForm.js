@@ -25,51 +25,53 @@ const BankForm = () => {
 
     return (
         <React.Fragment>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="undefined" crossorigin="anonymous"></script>
         <ErrorModal error={error} onClear={clearError}/>  
         {isLoading && <LoadingSpinner asOverlay/>}  
-            <form> {/* onSubmit={paymentSubmitHandler} */}
-                <input 
+            <form>
+                <h5>Card Details</h5>
+                <small class="form-text text-muted">Attendance fee is LKR 1000.00</small>
+                <div class="form-group">
+                    <input 
+                        class="form-control"
                         id="cardNo"
-                        element="input" 
-                        type="text" 
-                        lable="Card Number" 
+                        type="number" 
                         onChange={e => {
                             setCardNo(e.target.value);
                             setPayment({...payment, cardNo});
                             paymentForm = payment;
                         }}
                     />
-                <input 
+                </div>
+                <div class="form-group">
+                    <input
+                        class="form-control" 
                         id="expDate"
-                        element="input" 
                         type="date" 
-                        lable="Exp. Date" 
                         onChange={e => {
                             setExpDate(e.target.value);
                             setPayment({...payment, expDate});
                             paymentForm = payment;
                         }}
                     />
-                    <input 
+                </div>
+                <div class="form-group">
+                    <input
+                        class="form-control" 
                         id="cvv"
-                        element="input" 
-                        type="text" 
-                        lable="cvv" 
+                        type="number" 
                         onChange={e => {
                             setCvv(e.target.value);
                             setPayment({...payment, cvv});
                             paymentForm = payment;
                         }}
                     />
+                </div>
             </form>
         </React.Fragment>
     );
 };
 
-
 export { paymentForm };
-//exports.paymentForm = paymentForm;
 
 export default BankForm;
-
-// <button onClick={toast.success('Payment successful')}>Pay</button>   {/*<Button type="submit" disabled={!formState.isValid}>Pay</Button>*/}

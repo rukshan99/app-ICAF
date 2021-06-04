@@ -130,6 +130,7 @@ const SignIn = () => {
 
     return (
         <React.Fragment>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous"></link>
         <ErrorModal error={error} onClear={clearError}/>    
         <Card className="authentication">
             {isLoading && <LoadingSpinner asOverlay/>}
@@ -168,23 +169,19 @@ const SignIn = () => {
                 {!isSignInMode && formState.isValid && (<p style={{fontWeight: "bold"}}>Type</p>)}
                 {!isSignInMode && formState.isValid && (
                     <DropdownButton
-                    className="dropbtn"
                     alignCenter
                     title={type} 
                     id="dropdown-menu-align-right"
                     onSelect={typeSelectHandler}
                       >
-                          
-                            <Dropdown.Item eventKey="Attendee">Attendee</Dropdown.Item>
-                            <Dropdown.Divider />
-                            <Dropdown.Item eventKey="Researcher">Researcher</Dropdown.Item>
-                            <Dropdown.Divider />
-                            <Dropdown.Item eventKey="Workshop Presenter">Workshop Presenter</Dropdown.Item>
-
+                        <Dropdown.Item eventKey="Attendee">Attendee</Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Item eventKey="Researcher">Researcher</Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Item eventKey="Workshop Presenter">Workshop Presenter</Dropdown.Item>
                     </DropdownButton>
                 )}
                 {!isSignInMode && formState.isValid && (<br />)} 
-                {isAttendee && !isSignInMode && formState.isValid &&(<p>Registration fee is RS. 1000.00/=</p>)}
                 {isAttendee && !isSignInMode && formState.isValid &&(<BankForm />)}
                 {(isResearcher || isWorkshopPresenter) && !isSignInMode && formState.isValid && (<DocumentUpload />)}
                 {(isResearcher || isWorkshopPresenter) && !isSignInMode && formState.isValid && (<br />)}

@@ -166,6 +166,7 @@ const SignIn = () => {
                     errorText="Password should be at least 6 characters long." 
                     onInput={inputHandler}
                 />
+                <hr />
                 {!isSignInMode && formState.isValid && (<p style={{fontWeight: "bold"}}>Type</p>)}
                 {!isSignInMode && formState.isValid && (
                     <DropdownButton

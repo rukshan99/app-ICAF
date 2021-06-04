@@ -51,7 +51,8 @@ class DocumentUpload extends Component {
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="undefined" crossorigin="anonymous"></script>
         <div>
           <div>
-            <h4 className="process__heading">Document Upload</h4>
+            <h5 className="process__heading">Document Upload</h5>
+            <small class="form-text text-muted">Researchers/Workshop Presenters need to upload the document.</small><br />
             <div>
               <FileBase type="file" multiple={false} onDone={this.getBaseFile.bind(this)} />
             </div><br />

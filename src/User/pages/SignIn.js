@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -12,16 +12,15 @@ import DocumentUpload from '../uploadDocs/uploadDocs';
 import BankForm from '../payment/BankForm';
 
 import { useForm } from '../../Shared/hooks/form-hooks';
+import { authenticationService } from '../../services/authentication-service';
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../../Shared/Util/validators';
 import { useHttpClient } from '../../Shared/hooks/http-hook';
-import { AuthContext } from '../../Shared/context/auth-context';
 import { document } from '../uploadDocs/uploadDocs';
 import { paymentForm }  from '../payment/BankForm';
 
 import './SignIn.css';
 
 const SignIn = () => {
-    const auth = useContext(AuthContext);
 
     const [type, setType] = useState("Attendee");
     const [isSignInMode, setIsSignInMode] = useState(true);
@@ -71,25 +70,12 @@ const SignIn = () => {
 
         if(isSignInMode) {
             try{
-                const responseData = await sendRequest(
-                    'http://localhost:4000/auth',
-                    'POST', 
-                    JSON.stringify({
-                        email: formState.inputs.email.value,
-                        password: formState.inputs.password.value
-                    }),
-                    {
-                        'Content-Type': 'application/json'
-                    }
-                );
-
-                auth.SignIn(responseData.user.id); 
+                authenticationService.signin(formState.inputs.email.value, formState.inputs.password.value);
             } catch (err) {}
         } else {
             try {
-                console.log(paymentForm);
                 const responseData = await sendRequest(
-                    'http://localhost:4000/auth',
+                    'http://localhost:4000/api/v1/users/signup',
                     'POST',
                     JSON.stringify({
                         name: formState.inputs.name.value,
@@ -103,7 +89,7 @@ const SignIn = () => {
                         'Content-Type': 'application/json',
                     }
                 );
-                auth.SignIn(responseData.user.id); 
+                window.location.reload(true);
             } catch(err) {}
         }
     };

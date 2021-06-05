@@ -21,8 +21,8 @@ const closeSidebar = () => {
 
   return(
       <div className='container'>
-          <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar}/>
           <Main />
+          <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar}/>
       </div>
     
   )

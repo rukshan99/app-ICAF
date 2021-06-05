@@ -11,15 +11,7 @@ import Dasboard from './Admin/pages/Dashboard';
 const App = () => {
     const [isSignedIn, setIsSignedIn] = useState(false);
     const [userId, setUserId] = useState(false);
-    
     let routes;
-
-  
-  
-    
-    
-      
-
 
     const signIn = useCallback((uid) => {
       setIsSignedIn(true);

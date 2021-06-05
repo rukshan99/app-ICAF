@@ -8,25 +8,25 @@
   }
   
 
-  .sidebar__title {
+  /* .sidebar__title {
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: #f3f4f6;
     margin-bottom: 30px;
   }
-  
+   */
 
-  .sidebar__img {
+  /* .sidebar__img {
     display: flex;
     align-items: center;
-  }
+  } */
 
   
-  .sidebar__title > div > img {
+  /* .sidebar__title > div > img {
     width: 75px;
     object-fit: contain;
-  }
+  } */
 
   
   .sidebar__title > div > h1 {

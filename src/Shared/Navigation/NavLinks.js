@@ -65,10 +65,10 @@ const NavLinks = props => {
           <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink to="/">Download</NavLink>
+          <NavLink to="/download">Download</NavLink>
         </li>
         <li>
-          <NavLink to="/">Account</NavLink>
+          <NavLink to="/profile">Account</NavLink>
         </li>
         <li>
           <NavLink to="/" onClick={signout}>Sign out</NavLink>
@@ -82,7 +82,7 @@ const NavLinks = props => {
           <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink to="/">Download</NavLink>
+        <NavLink to="/download">Download</NavLink>
         </li>
         <li>
           <NavLink to="/auth">Sign in</NavLink>

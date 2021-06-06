@@ -17,7 +17,11 @@ const signin = (email, password) => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('currentUser', JSON.stringify(user));
             currentUserSubject.next(user);
-            history.push('/');
+            if(user._doc.role === "Admin") {
+                history.push('/dashboard');
+            }
+            else
+                history.push('/profile');
             window.location.reload(true);
             return user;
         });

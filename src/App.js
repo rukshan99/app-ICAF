@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
 import MainNavigation from './Shared/Navigation/MainNavigation';
-import ResearchPaper from './User/pages/ResearchPaper';
 import SignIn from './User/pages/SignIn';
+import Profile from './User/pages/profile';
 
 import { Role } from './_helpers/role';
 import { PrivateRoute } from './_helpers/private-route';
@@ -14,7 +14,7 @@ const App = () => {
   authenticationService.currentUser.subscribe(user => currentUser = user);
     const routes = currentUser ? (
         <Switch>
-          <PrivateRoute path="/user11/research" roles={[Role.Admin]} component={ResearchPaper} />
+          <PrivateRoute path="/profile" component={Profile} />
           <Redirect to="/" />
         </Switch>
       ) : (
@@ -22,7 +22,6 @@ const App = () => {
           <Route path="/auth">
                 <SignIn />
           </Route>
-          <PrivateRoute path="/user11/research" roles={[Role.Admin]} component={ResearchPaper} />
           <Redirect to="/" />
         </Switch>
       );

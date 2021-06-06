@@ -16,6 +16,7 @@ const signin = (email, password) => {
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('currentUser', JSON.stringify(user));
+            localStorage.setItem('currentUserPayments', user._doc.payments);
             currentUserSubject.next(user);
             if(user._doc.role === "Admin") {
                 history.push('/dashboard');
@@ -28,8 +29,9 @@ const signin = (email, password) => {
 }
 
 const signout = () => {
-    // remove user from local storage to log user out
+    // remove user and payment details from local storage to log user out
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUserPayments');
     currentUserSubject.next(null);
 }
 

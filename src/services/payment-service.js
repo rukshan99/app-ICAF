@@ -14,7 +14,7 @@ const Pay = async (paymentForm, userid) => {
         axios.post('http://localhost:4000/api/v1/users/pay', postData, axiosConfig)
           .then((res) => {
             console.log("Payment complete: ", res);
-            localStorage.setItem('currentUser', res.data.user);
+            localStorage.setItem('currentUserPayments', res.data.user.payments);
             window.location.reload(true);
           })
           .catch((err) => {

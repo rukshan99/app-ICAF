@@ -1,18 +1,33 @@
 import React, { useState } from 'react';
 
-import { authenticationService } from '../../services/authentication-service';
-
 import Card from '../../Shared/UIElements/Card';
 import LoadingSpinner from '../../Shared/UIElements/LoadingSpinner';
+import BankForm from '../payment/BankForm';
+
+import { paymentForm } from '../payment/BankForm';
+import { authenticationService } from '../../services/authentication-service';
+import { paymentService } from '../../services/payment-service';
 
 import './SignIn.css';
 
 let currentUser = null;
 
 const Profile = () => {
-    const [  isLoading, setIsLoading ] = useState(true);
+    const [ isLoading, setIsLoading ] = useState(true);
+    const [ isPayment, setIsPayment ] = useState(false);
+    const [ isPaid, setIsPaid ] = useState(false);
+
+    const paymentHandler = () => {
+        setIsPayment(true);
+    }
+    
+    const paymentFormHandler = () => {
+        paymentService(paymentForm, currentUser._doc._id);
+    }
+
     authenticationService.currentUser.subscribe(user => currentUser = user);
     setTimeout(() => {
+        if(currentUser._doc.role === "Researcher" && currentUser._doc.payments && currentUser._doc.payments.length > 0) setIsPaid(true);
         setIsLoading(false);
     }, 1000);
     authenticationService.currentUser.subscribe(user => currentUser = user);
@@ -39,11 +54,22 @@ const Profile = () => {
                     <a type="button" className="btn btn-outline-primary" download="Document" href={currentUser._doc.document.docData}>Download</a>
                     </div>
                 </div>
-                <p>Submission status: 
+                <br />
+                <p>Submission status:
                     {currentUser._doc.document.docStatus === "Pending" && <span className="text-light bg-warning"> {currentUser._doc.document.docStatus} </span>}
-                    {currentUser._doc.document.docStatus === "Accepted" && <span className="text-light bg-success"> {currentUser._doc.document.docStatus} </span>}
+                    {currentUser._doc.document.docStatus === "Accepted" && 
+                        <React.Fragment>
+                            <span className="text-light bg-success"> {currentUser._doc.document.docStatus} </span>
+                            <br />{!isPayment && !isPaid && <button className="btn btn-outline-primary" onClick={paymentHandler}>Pay</button>}
+                            <br />{isPaid && <button className="btn btn-outline-dark" disabled>Paid</button>}
+                        </React.Fragment>}
                     {currentUser._doc.document.docStatus === "Rejected" && <span className="text-light bg-danger"> {currentUser._doc.document.docStatus} </span>}
                     </p>
+                {!isPaid && isPayment && 
+                    <React.Fragment>
+                        <BankForm />
+                        {<button className="btn btn-outline-primary" onClick={paymentFormHandler}>Pay</button>}
+                    </React.Fragment>}
                 </React.Fragment>}
             </Card>
         </React.Fragment>

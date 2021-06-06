@@ -16,7 +16,7 @@ const NavLinks = props => {
         </NavLink>
       </li>
         <li>
-          <NavLink to="/">Editor</NavLink>
+          <NavLink to="/editor">Editor</NavLink>
         </li>
         <li>
           <NavLink to="/">Reviewer</NavLink>

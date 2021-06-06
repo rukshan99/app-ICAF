@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import MainNavigation from './Shared/Navigation/MainNavigation';
 import ResearchPaper from './User/pages/ResearchPaper';
 import SignIn from './User/pages/SignIn';
+import Editor from './Editor/editor';
 
 const App = () => {
     const [isSignedIn, setIsSignedIn] = useState(false);
@@ -23,6 +24,9 @@ const App = () => {
         <Switch>
           <Route path="/auth">
                 <SignIn />
+          </Route>
+          <Route path="/editor">
+               <Editor/>
           </Route>
           <Route path="/user11/research">
                 <ResearchPaper />

@@ -8,6 +8,7 @@ import Profile from './User/pages/profile';
 import { Role } from './_helpers/role';
 import { PrivateRoute } from './_helpers/private-route';
 import { authenticationService } from './services/authentication-service';
+import Footer from './Shared/Footer/footer';
 
 const App = () => {
   let currentUser = null;
@@ -30,6 +31,7 @@ const App = () => {
         <Router>
             <MainNavigation />
             <main>{routes}</main>
+            <Footer />
         </Router>
     );
 };

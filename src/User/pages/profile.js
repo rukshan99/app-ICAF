@@ -17,6 +17,8 @@ const Profile = () => {
     const [ isPayment, setIsPayment ] = useState(false);
     const [ isPaid, setIsPaid ] = useState(false);
 
+    const userPayments = localStorage.getItem('currentUserPayments');
+
     const paymentHandler = () => {
         setIsPayment(true);
     }
@@ -26,8 +28,9 @@ const Profile = () => {
     }
 
     authenticationService.currentUser.subscribe(user => currentUser = user);
+
     setTimeout(() => {
-        if(currentUser._doc.role === "Researcher" && currentUser._doc.payments && currentUser._doc.payments.length > 0) setIsPaid(true);
+        if(userPayments && userPayments.length > 0) setIsPaid(true);
         setIsLoading(false);
     }, 1000);
     authenticationService.currentUser.subscribe(user => currentUser = user);

@@ -30,6 +30,7 @@ const Profile = () => {
     authenticationService.currentUser.subscribe(user => currentUser = user);
 
     setTimeout(() => {
+        //console.log(userPayments);
         if(userPayments && userPayments.length > 0) setIsPaid(true);
         setIsLoading(false);
     }, 1000);

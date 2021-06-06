@@ -29,12 +29,13 @@ const BankForm = () => {
         {isLoading && <LoadingSpinner asOverlay/>}  
             <form>
                 <h5>Card Details</h5>
-                <small class="form-text text-muted">Attendance fee is LKR 1000.00</small>
+                <small class="form-text text-muted">Fee is LKR 1000.00</small>
                 <div class="form-group">
                     <input 
                         class="form-control"
                         id="cardNo"
-                        type="number" 
+                        type="number"
+                        placeholder="card no"
                         onChange={e => {
                             setCardNo(e.target.value);
                             setPayment({...payment, cardNo});
@@ -46,7 +47,8 @@ const BankForm = () => {
                     <input
                         class="form-control" 
                         id="expDate"
-                        type="date" 
+                        type="date"
+                        placeholder="exp date" 
                         onChange={e => {
                             setExpDate(e.target.value);
                             setPayment({...payment, expDate});
@@ -58,7 +60,8 @@ const BankForm = () => {
                     <input
                         class="form-control" 
                         id="cvv"
-                        type="number" 
+                        type="number"
+                        placeholder="cvv" 
                         onChange={e => {
                             setCvv(e.target.value);
                             setPayment({...payment, cvv});

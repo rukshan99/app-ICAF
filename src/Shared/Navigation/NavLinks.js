@@ -65,7 +65,7 @@ const NavLinks = props => {
           <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink to="/download">Download</NavLink>
+          <NavLink to="/downloads">Download</NavLink>
         </li>
         <li>
           <NavLink to="/profile">Account</NavLink>
@@ -82,7 +82,7 @@ const NavLinks = props => {
           <NavLink to="/">Home</NavLink>
         </li>
         <li>
-        <NavLink to="/download">Download</NavLink>
+        <NavLink to="/downloads">Download</NavLink>
         </li>
         <li>
           <NavLink to="/auth">Sign in</NavLink>

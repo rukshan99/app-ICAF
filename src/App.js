@@ -9,17 +9,24 @@ import { Role } from './_helpers/role';
 import { PrivateRoute } from './_helpers/private-route';
 import { authenticationService } from './services/authentication-service';
 import Footer from './Shared/Footer/footer';
+import Downloads from './downloads/downloads';
 
 const App = () => {
   let currentUser = null;
   authenticationService.currentUser.subscribe(user => currentUser = user);
     const routes = currentUser ? (
         <Switch>
+          <Route path="/downloads" exact>
+            <Downloads />
+          </Route>
           <PrivateRoute path="/profile" component={Profile} />
           <Redirect to="/" />
         </Switch>
       ) : (
         <Switch>
+          <Route path="/downloads" exact>
+            <Downloads />
+          </Route>
           <Route path="/auth">
                 <SignIn />
           </Route>

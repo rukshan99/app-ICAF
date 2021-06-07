@@ -1,12 +1,36 @@
-import React from "react";
+import React, { Component } from 'react';
 import "./Main.css";
 import hello from "../../assets/hello.png";
 import Chart from "../charts/chart";
+import axios from 'axios';
+
+class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      User: [],
+      totalroleAttendee: '',
+      totalroleResearcher: '',
+      totalroleWorkshopPresenter: ''
+    }
+  }
 
 
+  componentDidMount(){
+    axios.get(`http://localhost:4000/admin/count/`)
+    .then(response => {
+      this.setState({ totalroleAttendee: response.data.totalroleAttendee })
+      this.setState({ totalroleResearcher: response.data.totalroleResearcher})
+      this.setState({ totalroleWorkshopPresenter: response.data.totalroleWorkshopPresenter})
+      console.log(response);
+    })
+    .catch(error => {
+      alert(error.message)
+    })
+  }
 
 
-const Main = () => {
+render() {
   return (
     <main>
       <div className="main__container">
@@ -33,7 +57,7 @@ const Main = () => {
             <i className="fa fa-calendar fa-2x text-red"></i>
             <div className="card_inner">
               <p className="text-primary-p">Times of Editors</p>
-              <span className="font-bold text-title">2467</span>
+              <span className="font-bold text-title">{this.state.totalroleResearcher}</span>
             </div>
           </div>
 
@@ -42,7 +66,7 @@ const Main = () => {
             <i className="fa fa-video-camera fa-2x text-yellow"></i>
             <div className="card_inner">
               <p className="text-primary-p">Number of Feedbacks</p>
-              <span className="font-bold text-title">340</span>
+              <span className="font-bold text-title">{this.state.totalroleWorkshopPresenter}</span>
             </div>
           </div>
 
@@ -50,8 +74,8 @@ const Main = () => {
           <div className="card">
             <i className="fa fa-thumbs-up fa-2x text-green"></i>
             <div className="card_inner">
-              <p className="text-primary-p">Number of Reports</p>
-              <span className="font-bold text-title">645</span>
+              <p className="text-primary-p">Attendees:</p>
+              <span className="font-bold text-title">{this.state.totalroleAttendee}</span>
             </div>
           </div>
         </div>
@@ -109,10 +133,12 @@ const Main = () => {
 
           </div>
 
-    </main>
+      </main>
 
-  );
+    )
 
-};
+  }
+
+}
 
 export default Main;

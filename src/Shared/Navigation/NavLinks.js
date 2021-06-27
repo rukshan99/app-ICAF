@@ -20,7 +20,7 @@ const NavLinks = props => {
     return (
       <ul className="nav-links">
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/" exact>Home</NavLink>
         </li>
         <li>
           <NavLink to="/" exact>Admin Dashboard</NavLink>
@@ -34,7 +34,7 @@ const NavLinks = props => {
     return (
       <ul className="nav-links">
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/" exact>Home</NavLink>
         </li>
         <li>
           <NavLink to="/">Reviewer</NavLink>
@@ -48,7 +48,7 @@ const NavLinks = props => {
     return (
       <ul className="nav-links">
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/" exact>Home</NavLink>
         </li>
         <li>
           <NavLink to="/">Editor</NavLink>
@@ -62,7 +62,7 @@ const NavLinks = props => {
     return (
       <ul className="nav-links">
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/" exact>Home</NavLink>
         </li>
         <li>
           <NavLink to="/downloads">Download</NavLink>
@@ -79,7 +79,7 @@ const NavLinks = props => {
     return (
       <ul className="nav-links">
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/" exact>Home</NavLink>
         </li>
         <li>
         <NavLink to="/downloads">Download</NavLink>

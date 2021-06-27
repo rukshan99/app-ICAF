@@ -157,6 +157,7 @@ const SignIn = () => {
                 {!isSignInMode && formState.isValid && (
                     <DropdownButton
                     alignCenter
+                    variant="secondary"
                     title={type} 
                     id="dropdown-menu-align-right"
                     onSelect={typeSelectHandler}

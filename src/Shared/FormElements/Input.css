@@ -31,11 +31,11 @@
   
   .form-control--invalid label,
   .form-control--invalid p {
-    color: red;
+    color: #b73225;
   }
   
   .form-control--invalid input,
   .form-control--invalid textarea {
-    border-color: red;
+    border-color: #b73225;
     background: #ffd1d1;
   }

@@ -55,7 +55,7 @@ const Profile = () => {
                 <br />
                 <div className="row">
                     <div className="col-sm-12">
-                    <a type="button" className="btn btn-outline-primary" download="Document" href={currentUser._doc.document.docData}>Download</a>
+                    <a type="button" className="btn btn-outline-secondary" download="Document" href={currentUser._doc.document.docData}>Download</a>
                     </div>
                 </div>
                 <br />
@@ -64,7 +64,7 @@ const Profile = () => {
                     {currentUser._doc.document.docStatus === "Accepted" && 
                         <React.Fragment>
                             <span className="text-light bg-success"> {currentUser._doc.document.docStatus} </span>
-                            <br />{!isPayment && !isPaid && <button className="btn btn-outline-primary" onClick={paymentHandler}>Pay</button>}
+                            <br />{!isPayment && !isPaid && <button className="btn btn-outline-secondary" onClick={paymentHandler}>Pay</button>}
                             <br />{isPaid && <button className="btn btn-outline-dark" disabled>Paid</button>}
                         </React.Fragment>}
                     {currentUser._doc.document.docStatus === "Rejected" && <span className="text-light bg-danger"> {currentUser._doc.document.docStatus} </span>}
@@ -72,7 +72,7 @@ const Profile = () => {
                 {!isPaid && isPayment && 
                     <React.Fragment>
                         <BankForm />
-                        {<button className="btn btn-outline-primary" onClick={paymentFormHandler}>Pay</button>}
+                        {<button className="btn btn-outline-secondary" onClick={paymentFormHandler}>Pay</button>}
                     </React.Fragment>}
                 </React.Fragment>}
             </Card>

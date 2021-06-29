@@ -1,17 +1,36 @@
 import React, { Component } from 'react';
 import "./Main.css";
 import hello from "../../assets/hello.png";
-import Chart from "../charts/chart";
+// import Chart from "../charts/chart";
 import axios from 'axios';
+import Service from "../../service/service"
+
+// var Link = require('react-router-dom').Link
 
 class Main extends Component {
   constructor(props) {
     super(props);
+    this.retrieveConfernces = this.retrieveConfernces.bind(this);
+    this.retrievepresentations = this.retrievepresentations.bind(this);
+    this.refreshList = this.refreshList.bind(this);
+    this.setActiveConference = this.setActiveConference.bind(this);
+    this.setActivePresentations = this.setActivePresentations.bind(this);
+    
+
+    
+
     this.state = {
       User: [],
       totalroleAttendee: '',
       totalroleResearcher: '',
-      totalroleWorkshopPresenter: ''
+      totalroleWorkshopPresenter: '',
+      conferences: [],
+      currentConference: null,
+      currentIndex: -1,
+      presentations: [],
+      currentPresentation: null,
+      approvedOne: []
+
     }
   }
 
@@ -27,10 +46,83 @@ class Main extends Component {
     .catch(error => {
       alert(error.message)
     })
+
+    this.retrieveConfernces();
+    this.retrievepresentations();
+    this.retrieveApprovedConference()
   }
 
 
+  retrieveConfernces(){
+    Service.getConAll()
+    .then(response => {
+      this.setState({
+        conferences: response.data.data
+      });
+      console.log(response.data);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+  }
+
+  retrievepresentations(){
+    Service.getPresAll()
+    .then(response => {
+      this.setState({
+        presentations: response.data.data
+      });
+      console.log(response.data);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+  }
+
+  retrieveApprovedConference(){
+    Service.getAprroved()
+    .then(response => {
+      this.setState({
+        approvedOne: response.data.data
+      });
+      console.log(response.data);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+  }
+
+  refreshList() {
+    this.retrieveConfernces();
+    this.setState({
+      currentConference: null,
+      currentIndex: -1
+    });
+  }
+
+  setActiveConference(conference, index) {
+    this.setState({
+      currentConference: conference,
+      currentIndex: index
+    });
+  }
+
+  setActivePresentations(presentation, index) {
+    this.setState({
+      currentPresentation: presentation,
+      currentIndex: index
+    });
+  }
+
+  saveId(id) {
+    localStorage.setItem('conferencetId', id);
+  }
+  
+
+
 render() {
+  const{ conferences, currentConference, currentIndex,presentations,currentPresentation,approvedOne } = this.state;
+
   return (
     <main>
       <div className="main__container">
@@ -47,8 +139,14 @@ render() {
           <div className="card">
             <i className="fa fa-thumbs-up fa-2x text-greenfa"></i>
             <div className="card_inner">
-              <p className="text-primary-p">Number of Keytones</p>
-              <span className="font-bold text-title">578</span>
+            <p className="text-primary-p">Approved Conference</p>
+            { approvedOne &&
+                  approvedOne.map((approved) => (
+                  <li>
+                  {approved.name}
+                  <a href={`/contact/${approved._id}`}><button onClick={() => {this.saveId(approved._id)}}>More Details</button> </a>
+                </li>
+              ))}
             </div>
           </div>
 
@@ -158,23 +256,136 @@ render() {
           <div className="charts__left">
             <div className="charts__left__title">
               <div>
-                <h1>daily Reports</h1>
-                <p>Cupertino, California, USA</p>
+                {/* <h1>All Conferencees</h1>
               </div>
               <i className="fa fa-usd"></i>
             </div>
-            <Chart />
+            <div> */}
+                <h1>All Conferencees</h1>
+              </div>
+              <i className="fa fa-usd"></i>
+            </div>
+            <div className="list row">
+              <div className="col-md-6">
+                <h4>Confernces List</h4>
+
+               <ul className="list-group">
+                  { conferences &&
+                  conferences.map((conference, index) => (
+                  <li
+                  className={
+                    "list-group-item " +
+                    (index === currentIndex ? "active" : "")
+                  }
+                  onClick={() => this.setActiveConference(conference, index)}
+                  key={index}
+                >
+                  {conference.name}
+                </li>
+              ))}
+          </ul>
+
+        </div>
+        <div className="col-md-6">
+          {currentConference ? (
+            <div>
+              <h4>Conference</h4>
+              <div>
+                <label>
+                  <strong>Conference:</strong>
+                </label>{" "}
+                {currentConference.name}
+              </div>
+              <div>
+                <label>
+                  <strong>Description:</strong>
+                </label>{" "}
+                {currentConference.description}
+              </div>
+              <div>
+                <label>
+                  <strong>Status:</strong>
+                </label>{" "}
+                {currentConference.status ? "Approved" : "Pending"}
+              </div>
+
+              <a href={`/conferenceDetails/${currentConference._id}`}><button onClick={() => {this.saveId(currentConference._id)}}>update</button> </a>
+          
+            </div>
+          ) : (
+            <div>
+              <br />
+              {/* <p>Please click on a Tutorial...</p> */}
+            </div>
+          )}
+
+        </div>
+          </div>
           </div>
 
           <div className="charts__left">
             <div className="charts__left__title">
               <div>
-                <h1>daily Reports</h1>
-                <p>Cupertino, California, USA</p>
+                <h1>All Presestation</h1>
               </div>
               <i className="fa fa-usd"></i>
             </div>
-            <Chart />
+            <div className="list row">
+              <div className="col-md-6">
+                <h4>Presestations List</h4>
+
+               <ul className="list-group">
+                  { presentations &&
+                  presentations.map((presestation, index) => (
+                  <li
+                  className={
+                    "list-group-item " +
+                    (index === currentIndex ? "active" : "")
+                  }
+                  onClick={() => this.setActivePresentations(presestation, index)}
+                  key={index}
+                >
+                  {presestation.topic}
+                </li>
+              ))}
+          </ul>
+
+        </div>
+        <div className="col-md-6">
+          {currentPresentation ? (
+            <div>
+              <h4>Conference</h4>
+              <div>
+                <label>
+                  <strong>Conference:</strong>
+                </label>{" "}
+                {currentPresentation.topic}
+              </div>
+              <div>
+                <label>
+                  <strong>Description:</strong>
+                </label>{" "}
+                {currentPresentation.description}
+              </div>
+              {/* <div>
+                <label>
+                  <strong>Status:</strong>
+                </label>{" "}
+                {currentConference.status ? "Approved" : "Pending"}
+              </div>
+
+              <a href={`/conferenceDetails/${currentConference._id}`}><button onClick={() => {this.saveId(currentConference._id)}}>update</button> </a> */}
+          
+            </div>
+          ) : (
+            <div>
+              <br />
+              {/* <p>Please click on a Tutorial...</p> */}
+            </div>
+          )}
+
+        </div>
+      </div>
           </div>
 
           </div>

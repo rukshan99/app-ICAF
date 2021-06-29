@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import MainNavigation from './Shared/Navigation/MainNavigation';
 import SignIn from './User/pages/SignIn';
 import Dasboard from './Admin/pages/Dashboard';
+import Conference from './Admin/Components/conferenceDetails/conferenceDetails';
 
 
 const App = () => {
@@ -29,6 +30,9 @@ const App = () => {
           </Route>
           <Route path="/admin">
                 <Dasboard />
+          </Route>
+          <Route path="/conferenceDetails/:id">
+                <Conference />
           </Route>
           <Redirect to="/" />
         </Switch>

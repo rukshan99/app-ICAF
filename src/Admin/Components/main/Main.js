@@ -24,12 +24,20 @@ class Main extends Component {
       totalroleAttendee: '',
       totalroleResearcher: '',
       totalroleWorkshopPresenter: '',
+      totalAcceptedResearchPapers: '',
+      totalRejectedResearchPapers: '',
+      totalPendingResearchPapers: '',
+      totalRejectedWorkshop: '',
+      totalAcceptedWorkshop: '',
+      totalPendingWorkshop: '',
+
+
       conferences: [],
       currentConference: null,
       currentIndex: -1,
       presentations: [],
       currentPresentation: null,
-      approvedOne: []
+      approvedOne: [],
 
     }
   }
@@ -41,6 +49,13 @@ class Main extends Component {
       this.setState({ totalroleAttendee: response.data.totalroleAttendee })
       this.setState({ totalroleResearcher: response.data.totalroleResearcher})
       this.setState({ totalroleWorkshopPresenter: response.data.totalroleWorkshopPresenter})
+      this.setState({ totalAcceptedResearchPapers: response.data.totalAcceptedResearchPapers})
+      this.setState({ totalRejectedResearchPapers: response.data.totalRejectedResearchPapers})
+      this.setState({ totalPendingResearchPapers: response.data.totalPendingResearchPapers})
+      this.setState({ totalRejectedWorkshop: response.data.totalRejectedWorkshop})
+      this.setState({ totalAcceptedWorkshop: response.data.totalAcceptedWorkshop})
+      this.setState({ totalPendingWorkshop: response.data.totalPendingWorkshop})
+
       console.log(response);
     })
     .catch(error => {
@@ -201,12 +216,12 @@ render() {
             <div className="charts__right__cards">
               <div className="card1">
                 <h1>Pendings</h1>
-                <p>$75,300</p>
+                <p>{this.state.totalPendingResearchPapers}</p>
               </div>
 
               <div className="card2">
                 <h1>Approvels</h1>
-                <p>$124,200</p>
+                <p>{this.state.totalAcceptedResearchPapers}</p>
               </div>
 
               {/* <div className="card3">
@@ -216,7 +231,7 @@ render() {
 
               <div className="card4">
                 <h1>Rejects</h1>
-                <p>1881</p>
+                <p>{this.state.totalRejectedResearchPapers}</p>
               </div>
               
 
@@ -239,17 +254,17 @@ render() {
             <div className="charts__right__cards">
               <div className="card1">
                 <h1>Pendings</h1>
-                <p>$75,300</p>
+                <p>{this.state.totalPendingWorkshop}</p>
               </div>
 
               <div className="card2">
                 <h1>Approvels</h1>
-                <p>$124,200</p>
+                <p>{this.state.totalAcceptedWorkshop}</p>
               </div>
 
               <div className="card4">
                 <h1>Rejects</h1>
-                <p>1881</p>
+                <p>{this.state.totalRejectedWorkshop}</p>
               </div>
               
 

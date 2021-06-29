@@ -9,7 +9,11 @@ class Service {
     return http.get("/admin/presentation/all/");
   }
   
-  get(id) {
+  getCon(id) {
+    return http.get(`/admin/${id}`);
+  }
+
+  getApp(id) {
     return http.get(`/admin/${id}`);
   }
 

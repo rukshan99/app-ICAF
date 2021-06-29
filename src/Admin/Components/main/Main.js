@@ -114,10 +114,13 @@ class Main extends Component {
     });
   }
 
-  saveId(id) {
+  saveId1(id) {
     localStorage.setItem('conferencetId', id);
   }
   
+  saveId2(id){
+    localStorage.setItem('approvedID',id);
+  }
 
 
 render() {
@@ -144,7 +147,7 @@ render() {
                   approvedOne.map((approved) => (
                   <li>
                   {approved.name}
-                  <a href={`/contact/${approved._id}`}><button onClick={() => {this.saveId(approved._id)}}>More Details</button> </a>
+                  <a href={`/approvedConference/${approved._id}`}><button onClick={() => {this.saveId2(approved._id)}}>More Details</button> </a>
                 </li>
               ))}
             </div>
@@ -309,7 +312,7 @@ render() {
                 {currentConference.status ? "Approved" : "Pending"}
               </div>
 
-              <a href={`/conferenceDetails/${currentConference._id}`}><button onClick={() => {this.saveId(currentConference._id)}}>update</button> </a>
+              <a href={`/conferenceDetails/${currentConference._id}`}><button onClick={() => {this.saveId1(currentConference._id)}}>update</button> </a>
           
             </div>
           ) : (

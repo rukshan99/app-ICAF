@@ -25,7 +25,7 @@ export default class Conference extends Component {
 
 
   getConference(id) {
-    Service.get(id)
+    Service.getCon(id)
       .then(response => {
         this.setState({
           currentConference: response.data

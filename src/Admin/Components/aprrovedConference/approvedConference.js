@@ -1,31 +1,28 @@
 import React, { Component } from "react";
 import Service from "../../service/service";
 
-export default class Conference extends Component {
+export default class Approved extends Component {
   constructor(props) {
     super(props);
     this.getConference = this.getConference.bind(this);
-    this.updateStatus = this.updateStatus.bind(this);
+    // this.updateStatus = this.updateStatus.bind(this);
 
     this.state = {
 
      
-      
-      currentConference: {
-        id: null,
-        status: false
-      }
+      confernces: [],
+      currentConference: null 
     };
   }
 
   componentDidMount() {
-    console.log(localStorage.getItem('conferencetId'));
-     this.getConference(localStorage.getItem('conferencetId'));
+    console.log(localStorage.getItem('approvedID'));
+     this.getConference(localStorage.getItem('approvedID'));
   }
 
 
   getConference(id) {
-    Service.get(id)
+    Service.getApp(id)
       .then(response => {
         this.setState({
           currentConference: response.data
@@ -37,26 +34,26 @@ export default class Conference extends Component {
       });
   }
 
-  updateStatus(status) {
-    var data = {
-      id: this.state.currentConference._id,
-      status: status
-    };
+//   updateStatus(status) {
+//     var data = {
+//       id: this.state.currentConference._id,
+//       status: status
+//     };
 
-    Service.update(this.state.currentConference._id, data)
-      .then(response => {
-        this.setState(prevState => ({
-          currentConference: {
-            ...prevState.currentConference,
-            status: status
-          }
-        }));
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
+//     Service.update(this.state.currentConference._id, data)
+//       .then(response => {
+//         this.setState(prevState => ({
+//           currentConference: {
+//             ...prevState.currentConference,
+//             status: status
+//           }
+//         }));
+//         console.log(response.data);
+//       })
+//       .catch(e => {
+//         console.log(e);
+//       });
+//   }
 
   render() {
     const { currentConference } = this.state;

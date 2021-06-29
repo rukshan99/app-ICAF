@@ -7,6 +7,8 @@ import MainNavigation from './Shared/Navigation/MainNavigation';
 import SignIn from './User/pages/SignIn';
 import Dasboard from './Admin/pages/Dashboard';
 import Conference from './Admin/Components/conferenceDetails/conferenceDetails';
+import Approved from './Admin/Components/aprrovedConference/approvedConference';
+
 
 
 const App = () => {
@@ -33,6 +35,9 @@ const App = () => {
           </Route>
           <Route path="/conferenceDetails/:id">
                 <Conference />
+          </Route>
+          <Route path="/approvedConference/:id">
+                <Approved />
           </Route>
           <Redirect to="/" />
         </Switch>

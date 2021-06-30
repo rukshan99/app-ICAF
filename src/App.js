@@ -6,6 +6,10 @@ import ResearchPaper from './User/pages/ResearchPaper';
 import SignIn from './User/pages/SignIn';
 import Panel from './Editor/panel';
 import Conference from './Editor/create-conference';
+import ViewConference from './Editor/view-conference';
+import UpdateConference from './Editor/update-conference';
+import Workshops from './Editor/presentations-workshops';
+import Home from './Home/home';
 import Presentation from './Editor/presentation';
 
 
@@ -25,17 +29,26 @@ const App = () => {
 
     routes = (
         <Switch>
+           <Route path="/"   component={Home} exact>
+          </Route>
           <Route path="/auth">
                 <SignIn />
           </Route>
-          <Route path="/panel">
+          <Route path="/editor">
                <Panel/>
           </Route>
           <Route path="/conference">
                <Conference/>
           </Route>
+          <Route path="/viewConferences">
+               <ViewConference/>
+          </Route>
+          <Route path="/updateConference/:id"   component={UpdateConference}>
+          </Route>
           <Route path="/presentation">
                <Presentation/>
+          </Route>
+          <Route path="/workshops/:id"   component={Workshops}>
           </Route>
           <Route path="/user11/research">
                 <ResearchPaper />

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 
 
+
 class panel extends Component {
   
 
@@ -21,8 +22,11 @@ class panel extends Component {
         <NavLink to="/conference"><p class="btn btn-primary btn-lg btn-block">Create Conference</p></NavLink>
         <br></br>
         <NavLink to="/presentation"><p class="btn btn-success btn-lg btn-block">Presentations & Workshops</p></NavLink>
+        <br></br>
+        <NavLink to="/viewConferences"><p class="btn btn-info btn-lg btn-block">View Conferences</p></NavLink>
         </div>
       </div>
+  
     </React.Fragment>
     )
   }

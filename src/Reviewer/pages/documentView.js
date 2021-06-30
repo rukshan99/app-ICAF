@@ -8,7 +8,9 @@ class document extends Component{
      constructor(props){
         super(props);
         this.state = {
-            documents: []
+            documents: [],
+            Status:''
+
           }
         
     };
@@ -26,20 +28,30 @@ class document extends Component{
         
     }
 
-    // OnAccept(e) {
+     OnAccept(e) {
     
-    //     const Status="Accept"
-    //     axios.post(`http://localhost:4000/reviewer/update/${this.props.match.params.id}`, Status)
-    //         .then(res => console.log(res.data));
-    // }
+        const Data ={
+            Status:"Accept",
+            RequestID:this.props.match.params.id    
+        }
 
 
-    // OnDecline(e) {
+         
+         axios.put(`http://localhost:4000/reviewer/update/${this.props.match.params.id}`, Data)
+             .then(res => console.log(res.data));
+     }
+
+
+     OnDecline(e) {
     
-    //     const Status="Decline"
-    //     axios.post(`http://localhost:4000/reviewer/update/${this.props.match.params.id}`, Status)
-    //         .then(res => console.log(res.data));
-    // }
+        const Data ={
+            Status:"Decline",
+            RequestID:this.props.match.params.id    
+        }
+
+         axios.put(`http://localhost:4000/reviewer/update/${this.props.match.params.id}`, Data)
+             .then(res => console.log(res.data));
+     }
     
 
     render(){

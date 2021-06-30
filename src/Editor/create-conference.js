@@ -14,7 +14,7 @@ const initialState = {
 }
 
 
-class editor extends Component {
+class conference extends Component {
   constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
@@ -175,4 +175,4 @@ class editor extends Component {
   }
 }
 
-export default editor;
+export default conference;

@@ -5,7 +5,7 @@ import MainNavigation from './Shared/Navigation/MainNavigation';
 import ResearchPaper from './User/pages/ResearchPaper';
 import SignIn from './User/pages/SignIn';
 import Panel from './Editor/panel';
-import Editor from './Editor/editor';
+import Conference from './Editor/create-conference';
 import Presentation from './Editor/presentation';
 
 
@@ -32,7 +32,7 @@ const App = () => {
                <Panel/>
           </Route>
           <Route path="/conference">
-               <Editor/>
+               <Conference/>
           </Route>
           <Route path="/presentation">
                <Presentation/>

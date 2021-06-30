@@ -1,96 +1,79 @@
 import React, { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Input from '../../Shared/FormElements/Input';
-import Button from '../../Shared/FormElements/Button';
 import ErrorModal from '../../Shared/UIElements/ErrorModal';
 import LoadingSpinner from '../../Shared/UIElements/LoadingSpinner';
 
 import { useHttpClient } from '../../Shared/hooks/http-hook';
-import { AuthContext } from '../../Shared/context/auth-context';
-import { useForm } from '../../Shared/hooks/form-hooks';
-import { VALIDATOR_REQUIRE } from '../../Shared/Util/validators';
+
+let paymentForm;
 
 const BankForm = () => {
 
-    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+    const { isLoading, error, clearError } = useHttpClient();
 
-    const [formState, inputHandler, setFormData] = useForm(
-        {
-            cardNo: {
-                value: '',
-                isValid: false
-            },
-            expDate: {
-                value: '',
-                isValid: false
-            },
-            cvv: {
-                value: '',
-                isValid: false
-            }
-        },
-        false
-    );
-
-    const paymentSubmitHandler = async event => {
-        event.preventDefault();
-        try{
-            const responseData = await sendRequest(
-                '', //Add link to backend later 'http://localhost:5000/api/.....'
-                'POST', 
-                JSON.stringify({
-                    cardNo: formState.inputs.cardNo.value,
-                    expDate: formState.inputs.expDate.value,
-                    cvv: formState.inouts.cvv.value
-                }),
-                {
-                    'Content-Type': 'application/json'
-                }
-            );
-    
-            //auth.SignIn(responseData.user.id); 
-        } catch (err) {}
-    };
-    
+    const [ cardNo, setCardNo ] = useState('');
+    const [ expDate, setExpDate ] = useState('');
+    const [ cvv, setCvv ] = useState('');
+    const [ payment, setPayment ] = useState({
+        amount: 1000,
+        cardNo,
+        expDate,
+        cvv
+    });
 
     return (
         <React.Fragment>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="undefined" crossorigin="anonymous"></script>
         <ErrorModal error={error} onClear={clearError}/>  
         {isLoading && <LoadingSpinner asOverlay/>}  
-            <form onSubmit={paymentSubmitHandler}>
-                <Input 
+            <form>
+                <h5>Card Details</h5>
+                <small class="form-text text-muted">Fee is LKR 1000.00</small>
+                <div class="form-group">
+                    <input 
+                        class="form-control"
                         id="cardNo"
-                        element="input" 
-                        type="text" 
-                        lable="Card Number" 
-                        validators={[VALIDATOR_REQUIRE()]} 
-                        errorText="Please enter your card number." 
-                        onInput={inputHandler}
+                        type="number"
+                        placeholder="card no"
+                        onChange={e => {
+                            setCardNo(e.target.value);
+                            setPayment({...payment, cardNo});
+                            paymentForm = payment;
+                        }}
                     />
-                <Input 
+                </div>
+                <div class="form-group">
+                    <input
+                        class="form-control" 
                         id="expDate"
-                        element="input" 
-                        type="text" 
-                        lable="Exp. Date" 
-                        validators={[VALIDATOR_REQUIRE()]} 
-                        errorText="Please enter the expire date." 
-                        onInput={inputHandler}
+                        type="date"
+                        placeholder="exp date" 
+                        onChange={e => {
+                            setExpDate(e.target.value);
+                            setPayment({...payment, expDate});
+                            paymentForm = payment;
+                        }}
                     />
-                    <Input 
+                </div>
+                <div class="form-group">
+                    <input
+                        class="form-control" 
                         id="cvv"
-                        element="input" 
-                        type="text" 
-                        lable="cvv" 
-                        validators={[VALIDATOR_REQUIRE()]} 
-                        errorText="Please enter the cvv." 
-                        onInput={inputHandler}
+                        type="number"
+                        placeholder="cvv" 
+                        onChange={e => {
+                            setCvv(e.target.value);
+                            setPayment({...payment, cvv});
+                            paymentForm = payment;
+                        }}
                     />
+                </div>
             </form>
         </React.Fragment>
     );
-
 };
+
+export { paymentForm };
 
 export default BankForm;

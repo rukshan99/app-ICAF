@@ -8,6 +8,8 @@ import SignIn from './User/pages/SignIn';
 import Dashboard from './Admin/pages/Dashboard';
 import Conference from './Admin/Components/conferenceDetails/conferenceDetails';
 import Approved from './Admin/Components/aprrovedConference/approvedConference';
+import PresentationDetails from './Admin/Components/presentationsDetails/presentationDetails';
+import WorkshopsDetails from './Admin/Components/workshopsDetails/workshopsDetails';
 
 
 
@@ -36,8 +38,11 @@ const App = () => {
           <Route path="/conferenceDetails/:id">
                 <Conference />
           </Route>
-          <Route path="/approvedConference/:id">
-                <Approved />
+          <Route path="/approvedConference/:id" component={Approved}>
+          </Route>
+          <Route path="/presentationDetails/:id" component={PresentationDetails}>
+          </Route>
+          <Route path="/workshopsDetails/:id" component={WorkshopsDetails}>
           </Route>
           <Redirect to="/" />
         </Switch>

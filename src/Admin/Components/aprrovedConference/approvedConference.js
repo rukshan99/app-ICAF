@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import Service from "../../service/service";
+import Card from "../../../Shared/UIElements/Card";
+
+import './approvedConference.css'
 
 export default class Approved extends Component {
   constructor(props) {
     super(props);
     this.getConference = this.getConference.bind(this);
-    // this.updateStatus = this.updateStatus.bind(this);
 
     this.state = {
 
@@ -34,73 +36,89 @@ export default class Approved extends Component {
       });
   }
 
-//   updateStatus(status) {
-//     var data = {
-//       id: this.state.currentConference._id,
-//       status: status
-//     };
+  navigatePresentationsPage(e, conferenceId) {
+    window.location = `/presentationDetails/${conferenceId}`
+  }
 
-//     Service.update(this.state.currentConference._id, data)
-//       .then(response => {
-//         this.setState(prevState => ({
-//           currentConference: {
-//             ...prevState.currentConference,
-//             status: status
-//           }
-//         }));
-//         console.log(response.data);
-//       })
-//       .catch(e => {
-//         console.log(e);
-//       });
-//   }
+  navigateWokshopsPage(e, conferenceId) {
+    window.location = `/workshopsDetails/${conferenceId}`
+  }
+
+
 
   render() {
     const { currentConference } = this.state;
 
     return (
-      <div>
+      <div className= "container">
+        <Card className= "Appr">
         {currentConference ? (
           <div className="edit-form">
             <h4>Conference</h4>
             <div>
-                <label>
+                <label className="ap">
                   <strong>Conference:</strong>
                 </label>{" "}
                 {currentConference.name}
               </div>
               <div>
-                <label>
+                <label className="ap">
                   <strong>Description:</strong>
                 </label>{" "}
                 {currentConference.description}
               </div>
-            
-
+              <div>
+                <label className="ap">
+                  <strong>Venue:</strong>
+                </label>{" "}
+                {currentConference.venue}
+              </div>
+              <div>
+                <label className="ap">
+                  <strong>Start Date:</strong>
+                </label>{" "}
+                {currentConference.starttime}
+              </div>
+              <div>
+                <label className="ap">
+                  <strong>End Date:</strong>
+                </label>{" "}
+                {currentConference.endtime}
+              </div>
+              <div>
+                <label className="ap">
+                  <strong>Guest Speaker:</strong>
+                </label>{" "}
+                {currentConference.guest}
+              </div>
+              <div>
+                <label className="ap">
+                  <strong>Guest Speaker:</strong>
+                </label>{" "}
+                {currentConference.guest2}
+              </div>
+              <div>
+                <label className="ap">
+                  <strong>Guest Speaker:</strong>
+                </label>{" "}
+                {currentConference.guest3}
+              </div>
               <div className="form-group">
-                <label>
+                <label className="ap">
                   <strong>Status:</strong>
                 </label>
                 {currentConference.status ? "Approved" : "Pending"}
               </div>
-            
-
-            {/* {currentConference.status ? (
-              <button
-                className="badge badge-primary mr-2"
-                onClick={() => this.updateStatus(false)}
-              >
-                UnPublish
-              </button>
-            ) : (
-              <button
-                className="badge badge-primary mr-2"
-                onClick={() => this.updateStatus(true)}
-              >
-                Publish
-              </button>
-            )} */}
-
+              <div>
+                <label className="ap">
+                  <strong onClick={e => this.navigatePresentationsPage(e, currentConference._id)}>Related Presestations</strong>
+                </label>
+              </div>
+              <div>
+                <label className="ap">
+                  <strong onClick={e => this.navigateWokshopsPage(e, currentConference._id)}>Related Work Shops</strong>
+                </label>
+              </div>
           </div>
         ) : (
           <div>
@@ -108,6 +126,7 @@ export default class Approved extends Component {
             {/* <p>Please click on a Tutorial...</p> */}
           </div>
         )}
+        </Card>
       </div>
     );
   }

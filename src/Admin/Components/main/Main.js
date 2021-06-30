@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import "./Main.css";
 import hello from "../../assets/hello.png";
-// import Chart from "../charts/chart";
 import axios from 'axios';
 import Service from "../../service/service"
 
-// var Link = require('react-router-dom').Link
+
 
 class Main extends Component {
   constructor(props) {
     super(props);
     this.retrieveConfernces = this.retrieveConfernces.bind(this);
     this.retrievepresentations = this.retrievepresentations.bind(this);
+    this.retrieveWorkshops = this.retrieveWorkshops.bind(this);
     this.refreshList = this.refreshList.bind(this);
     this.setActiveConference = this.setActiveConference.bind(this);
     this.setActivePresentations = this.setActivePresentations.bind(this);
+    this.setActiveWorkshops = this.setActiveWorkshops.bind(this);
     
 
     
@@ -35,16 +36,20 @@ class Main extends Component {
       conferences: [],
       currentConference: null,
       currentIndex: -1,
+      currentIndex2: -1,
+      currentIndex3: -1,
       presentations: [],
       currentPresentation: null,
       approvedOne: [],
+      workshops: [],
+      currentWorkshop: null
 
     }
   }
 
 
   componentDidMount(){
-    axios.get(`http://localhost:4000/admin/count/`)
+    axios.get(`http://localhost:4000/api/v1/admin/count/`)
     .then(response => {
       this.setState({ totalroleAttendee: response.data.totalroleAttendee })
       this.setState({ totalroleResearcher: response.data.totalroleResearcher})
@@ -64,7 +69,8 @@ class Main extends Component {
 
     this.retrieveConfernces();
     this.retrievepresentations();
-    this.retrieveApprovedConference()
+    this.retrieveApprovedConference();
+    this.retrieveWorkshops();
   }
 
 
@@ -86,6 +92,19 @@ class Main extends Component {
     .then(response => {
       this.setState({
         presentations: response.data.data
+      });
+      console.log(response.data);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+  }
+
+  retrieveWorkshops(){
+    Service.getWorkAll()
+    .then(response => {
+      this.setState({
+        workshops: response.data.data
       });
       console.log(response.data);
     })
@@ -118,14 +137,21 @@ class Main extends Component {
   setActiveConference(conference, index) {
     this.setState({
       currentConference: conference,
-      currentIndex: index
+      currentIndex1: index
     });
   }
 
   setActivePresentations(presentation, index) {
     this.setState({
       currentPresentation: presentation,
-      currentIndex: index
+      currentIndex2: index
+    });
+  }
+
+  setActiveWorkshops(workshop, index) {
+    this.setState({
+      currentWorkshop: workshop,
+      currentIndex3: index
     });
   }
 
@@ -137,13 +163,17 @@ class Main extends Component {
     localStorage.setItem('approvedID',id);
   }
 
+  navigatePresentationsPage(e, conferenceId) {
+    window.location = `/approvedConference/${conferenceId}`
+  }
+
 
 render() {
-  const{ conferences, currentConference, currentIndex,presentations,currentPresentation,approvedOne } = this.state;
+  const{ conferences, currentConference, currentIndex1,currentIndex2,currentIndex3,presentations,currentPresentation,approvedOne,workshops,currentWorkshop } = this.state;
 
   return (
     <main>
-      <div className="main__container">
+      <div>
         <div className="main__title">
           <img src={hello} alt="hello" />
           <div className="main__greeting">
@@ -158,13 +188,11 @@ render() {
             <i className="fa fa-thumbs-up fa-2x text-greenfa"></i>
             <div className="card_inner">
             <p className="text-primary-p">Approved Conference</p>
-            { approvedOne &&
-                  approvedOne.map((approved) => (
-                  <li>
-                  {approved.name}
-                  <a href={`/approvedConference/${approved._id}`}><button onClick={() => {this.saveId2(approved._id)}}>More Details</button> </a>
-                </li>
-              ))}
+            { approvedOne[0] && 
+                <h5 onClick={e => this.navigatePresentationsPage(e, approvedOne[0]._id)}>
+                  {approvedOne[0].name}
+                </h5>
+              }
             </div>
           </div>
 
@@ -224,11 +252,6 @@ render() {
                 <p>{this.state.totalAcceptedResearchPapers}</p>
               </div>
 
-              {/* <div className="card3">
-                <h1></h1>
-                <p>3900</p>
-              </div> */}
-
               <div className="card4">
                 <h1>Rejects</h1>
                 <p>{this.state.totalRejectedResearchPapers}</p>
@@ -271,75 +294,6 @@ render() {
             </div>
 
           </div>
-          <div className="charts__left">
-            <div className="charts__left__title">
-              <div>
-                {/* <h1>All Conferencees</h1>
-              </div>
-              <i className="fa fa-usd"></i>
-            </div>
-            <div> */}
-                <h1>All Conferencees</h1>
-              </div>
-              <i className="fa fa-usd"></i>
-            </div>
-            <div className="list row">
-              <div className="col-md-6">
-                <h4>Confernces List</h4>
-
-               <ul className="list-group">
-                  { conferences &&
-                  conferences.map((conference, index) => (
-                  <li
-                  className={
-                    "list-group-item " +
-                    (index === currentIndex ? "active" : "")
-                  }
-                  onClick={() => this.setActiveConference(conference, index)}
-                  key={index}
-                >
-                  {conference.name}
-                </li>
-              ))}
-          </ul>
-
-        </div>
-        <div className="col-md-6">
-          {currentConference ? (
-            <div>
-              <h4>Conference</h4>
-              <div>
-                <label>
-                  <strong>Conference:</strong>
-                </label>{" "}
-                {currentConference.name}
-              </div>
-              <div>
-                <label>
-                  <strong>Description:</strong>
-                </label>{" "}
-                {currentConference.description}
-              </div>
-              <div>
-                <label>
-                  <strong>Status:</strong>
-                </label>{" "}
-                {currentConference.status ? "Approved" : "Pending"}
-              </div>
-
-              <a href={`/conferenceDetails/${currentConference._id}`}><button onClick={() => {this.saveId1(currentConference._id)}}>update</button> </a>
-          
-            </div>
-          ) : (
-            <div>
-              <br />
-              {/* <p>Please click on a Tutorial...</p> */}
-            </div>
-          )}
-
-        </div>
-          </div>
-          </div>
 
           <div className="charts__left">
             <div className="charts__left__title">
@@ -358,7 +312,7 @@ render() {
                   <li
                   className={
                     "list-group-item " +
-                    (index === currentIndex ? "active" : "")
+                    (index === currentIndex2 ? "active" : "")
                   }
                   onClick={() => this.setActivePresentations(presestation, index)}
                   key={index}
@@ -374,26 +328,35 @@ render() {
             <div>
               <h4>Conference</h4>
               <div>
-                <label>
+                <label className="co">
                   <strong>Conference:</strong>
                 </label>{" "}
                 {currentPresentation.topic}
               </div>
               <div>
-                <label>
+                <label className="co">
                   <strong>Description:</strong>
                 </label>{" "}
                 {currentPresentation.description}
               </div>
-              {/* <div>
-                <label>
-                  <strong>Status:</strong>
+              <div>
+                <label className="co">
+                  <strong>Start Time:</strong>
                 </label>{" "}
-                {currentConference.status ? "Approved" : "Pending"}
+                {currentPresentation.starttime}
               </div>
-
-              <a href={`/conferenceDetails/${currentConference._id}`}><button onClick={() => {this.saveId(currentConference._id)}}>update</button> </a> */}
-          
+              <div>
+                <label className="co">
+                  <strong>End Time:</strong>
+                </label>{" "}
+                {currentPresentation.endtime}
+              </div>
+              <div>
+                <label className="co">
+                  <strong>Presentor:</strong>
+                </label>{" "}
+                {currentPresentation.presenter}
+              </div>
             </div>
           ) : (
             <div>
@@ -404,10 +367,150 @@ render() {
 
         </div>
       </div>
+      
+      
           </div>
+          <div className="charts__left">
+            <div className="charts__left__title">
+              <div>
+                <h1>All Work Shops</h1>
+              </div>
+              <i className="fa fa-usd"></i>
+            </div>
+            <div className="list row">
+              <div className="col-md-6">
+                <h4>workshop List</h4>
+
+               <ul className="list-group">
+                  { workshops &&
+                  workshops.map((workshop, index) => (
+                  <li
+                  className={
+                    "list-group-item " +
+                    (index === currentIndex3 ? "active" : "")
+                  }
+                  onClick={() => this.setActiveWorkshops(workshop, index)}
+                  key={index}
+                >
+                  {workshop.topic}
+                </li>
+              ))}
+          </ul>
+
+        </div>
+        <div className="col-md-6">
+          {currentWorkshop ? (
+            <div>
+              <h4>Conference</h4>
+              <div>
+                <label className="co">
+                  <strong>Conference:</strong>
+                </label>{" "}
+                {currentWorkshop.topic}
+              </div>
+              <div>
+                <label className="co">
+                  <strong>Description:</strong>
+                </label>{" "}
+                {currentWorkshop.description}
+              </div>
+              <div>
+                <label className="co">
+                  <strong>Start Time:</strong>
+                </label>{" "}
+                {currentWorkshop.starttime}
+              </div>
+              <div>
+                <label className="co">
+                  <strong>End Time:</strong>
+                </label>{" "}
+                {currentWorkshop.endtime}
+              </div>
+              <div>
+                <label className="co">
+                  <strong>Presentor:</strong>
+                </label>{" "}
+                {currentWorkshop.presenter}
+              </div>
+            </div>
+          ) : (
+            <div>
+              <br />
+              {/* <p>Please click on a Tutorial...</p> */}
+            </div>
+          )}
+
+        </div>
+      </div>
+      </div>
 
           </div>
 
+          <div className="charts__left">
+            <div className="charts__left__title">
+              <div>
+                
+                <h1>All Conferencees</h1>
+              </div>
+              <i className="fa fa-usd"></i>
+            </div>
+            <div className="list row">
+              <div className="col-md-6">
+                <h4>Confernces List</h4>
+
+               <ul className="list-group">
+                  { conferences &&
+                  conferences.map((conference, index) => (
+                  <li
+                  className={
+                    "list-group-item " +
+                    (index === currentIndex1 ? "active" : "")
+                  }
+                  onClick={() => this.setActiveConference(conference, index)}
+                  key={index}
+                >
+                  {conference.name}
+                </li>
+              ))}
+          </ul>
+
+        </div>
+        <div className="col-md-6">
+          {currentConference ? (
+            <div>
+              <h4>Conference</h4>
+              <div>
+                <label className="co">
+                  <strong>Conference:</strong>
+                </label>{" "}
+                {currentConference.name}
+              </div>
+              <div>
+                <label className="co">
+                  <strong>Description:</strong>
+                </label>{" "}
+                {currentConference.description}
+              </div>
+              <div>
+                <label className="co">
+                  <strong>Status:</strong>
+                </label>{" "}
+                {currentConference.status ? "Approved" : "Pending"}
+              </div>
+
+              <a href={`/conferenceDetails/${currentConference._id}`}><button className="btn btn-primary" onClick={() => {this.saveId1(currentConference._id)}}>More Details</button> </a>
+          
+            </div>
+          ) : (
+            <div>
+              <br />
+              {/* <p>Please click on a Tutorial...</p> */}
+            </div>
+          )}
+
+      </div>
+          </div>
+          </div>
           </div>
 
       </main>

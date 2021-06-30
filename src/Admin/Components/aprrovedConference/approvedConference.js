@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import Service from "../../service/service";
 import Card from "../../../Shared/UIElements/Card";
 
+
 import './approvedConference.css'
 
+let isLoading = true;
 export default class Approved extends Component {
   constructor(props) {
     super(props);
     this.getConference = this.getConference.bind(this);
 
-    this.state = {
-
-     
+    this.state = {     
       confernces: [],
       currentConference: null 
     };
@@ -19,9 +19,8 @@ export default class Approved extends Component {
 
   componentDidMount() {
     console.log(localStorage.getItem('approvedID'));
-     this.getConference(localStorage.getItem('approvedID'));
+     this.getConference(localStorage.getItem('approvedID'))
   }
-
 
   getConference(id) {
     Service.getApp(id)
@@ -51,7 +50,7 @@ export default class Approved extends Component {
 
     return (
       <div className= "container">
-        <Card className= "Appr">
+        <Card className= "Appr"> 
         {currentConference ? (
           <div className="edit-form">
             <h4>Conference</h4>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Card from '../../Shared/UIElements/Card';
 import './userList.css'
+import LoadingSpinner from '../../Shared/UIElements/LoadingSpinner';
 
 export default class userList extends React.Component {
 
@@ -27,6 +28,7 @@ export default class userList extends React.Component {
             <div className="container">
             <Card className="userList">
                 <h1>Researchers</h1>
+                {this.state.usersCollection.length === 0 && <LoadingSpinner/>}
                      {this.state.usersCollection.length > 0 && this.state.usersCollection.map((user, index) => (
                      <div key={index} className="card mb-3" onClick={e => this.navigateDocumentPage(e, user._id)}>
                         <div className="p-3" > 

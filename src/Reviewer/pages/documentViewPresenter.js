@@ -4,6 +4,7 @@ import axios from 'axios';
 import Card from '../../Shared/UIElements/Card';
 import Button from '../../Shared/FormElements/Button';
 import './documentView.css'
+import LoadingSpinner from '../../Shared/UIElements/LoadingSpinner';
 
 
 class presenterDocument extends Component{
@@ -27,8 +28,8 @@ class presenterDocument extends Component{
         })  
     }
 
-     refreshPage(e){
-        window.location.reload();
+     refreshPage(){
+        window.location.reload(true);
      }
 
 
@@ -61,7 +62,8 @@ class presenterDocument extends Component{
                 <div className="container">
                 <Card className="document">
                     <div className="container">
-                    <h1>Document</h1>       
+                    <h1>Document</h1> 
+                    {this.state.documents.length === 0 && <LoadingSpinner/>}      
                     <div className="card mb-3">
                             <iframe src={this.state.documents.docData} alt="document" width="100%" height="750" frameBorder="0" allowFullScreen/>
                             <h3>Doc Status: {this.state.documents.docStatus}</h3>

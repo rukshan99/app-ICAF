@@ -26,7 +26,7 @@ const NavLinks = props => {
           <NavLink to="/admin" exact>Dashboard</NavLink>
         </li>
         <li>
-          <NavLink to="/" onClick={signout} exact>Sign out</NavLink>
+          <NavLink to="/auth" onClick={signout}>Sign out</NavLink>
         </li>
       </ul>
     );
@@ -43,7 +43,7 @@ const NavLinks = props => {
           <NavLink to="/workshopPresentersList">Workshop Presenters</NavLink>
         </li>
         <li>
-          <NavLink to="/" onClick={signout} exact>Sign out</NavLink>
+          <NavLink to="/auth" onClick={signout} exact>Sign out</NavLink>
         </li>
       </ul>
     );
@@ -57,7 +57,7 @@ const NavLinks = props => {
           <NavLink to="/editor">Dashboard</NavLink>
         </li>
         <li>
-          <NavLink to="/" onClick={signout} exact>Sign out</NavLink>
+          <NavLink to="/auth" onClick={signout} exact>Sign out</NavLink>
         </li>
       </ul>
     );
@@ -74,7 +74,7 @@ const NavLinks = props => {
           <NavLink to="/profile">Account</NavLink>
         </li>
         <li>
-          <NavLink to="/" onClick={signout} exact>Sign out</NavLink>
+          <NavLink to="/auth" onClick={signout} exact>Sign out</NavLink>
         </li>
       </ul>
     );

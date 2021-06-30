@@ -19,9 +19,12 @@ const signin = (email, password) => {
             localStorage.setItem('currentUserPayments', user._doc.payments);
             currentUserSubject.next(user);
             if(user._doc.role === "Admin") {
-                history.push('/dashboard');
-            }
-            else
+                history.push('/admin');
+            } else if(user._doc.role === "Editor") {
+                history.push('/editor');
+            } else if(user._doc.role === "Reviewer") {
+                history.push('/researchersList');
+            } else
                 history.push('/profile');
             window.location.reload(true);
             return user;

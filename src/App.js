@@ -32,6 +32,7 @@ const App = () => {
   authenticationService.currentUser.subscribe(user => currentUser = user);
   const routes = currentUser ? (
     <Switch>
+      <Route path="/" component={Home} exact />
       <Route path="/downloads" exact >
         <Downloads />
       </Route>

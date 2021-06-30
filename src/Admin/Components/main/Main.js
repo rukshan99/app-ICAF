@@ -175,10 +175,11 @@ render() {
     <main>
       <div>
         <div className="main__title">
-          <img src={hello} alt="hello" />
+        
           <div className="main__greeting">
-            <h1>Hello ICAF.</h1>
-            <p>Welcome to your admin dashboard</p>
+            <br></br>
+            <h1>Admin Dashboard</h1>
+            <br></br>
           </div>
         </div>
 
@@ -233,7 +234,7 @@ render() {
           <div className="charts__right">
             <div className="charts__right__title">
               <div>
-                <h1>Summary of Research Papers</h1>
+                <h2>Summary of Research Papers</h2>
                 <p>ICAF Sri Lanka</p>
               </div>
               <i className="fa fa-usd"></i>
@@ -243,17 +244,17 @@ render() {
 
             <div className="charts__right__cards">
               <div className="card1">
-                <h1>Pendings</h1>
+                <h5>Pendings</h5>
                 <p>{this.state.totalPendingResearchPapers}</p>
               </div>
 
               <div className="card2">
-                <h1>Approvels</h1>
+                <h5>Approvels</h5>
                 <p>{this.state.totalAcceptedResearchPapers}</p>
               </div>
 
               <div className="card4">
-                <h1>Rejects</h1>
+                <h5>Rejects</h5>
                 <p>{this.state.totalRejectedResearchPapers}</p>
               </div>
               
@@ -266,7 +267,7 @@ render() {
           <div className="charts__right">
             <div className="charts__right__title">
               <div>
-                <h1>Summary of Work Shops</h1>
+                <h2>Summary of Work Shops</h2>
                 <p>ICAF Sri Lanka</p>
               </div>
               <i className="fa fa-usd"></i>
@@ -276,17 +277,17 @@ render() {
 
             <div className="charts__right__cards">
               <div className="card1">
-                <h1>Pendings</h1>
+                <h5>Pendings</h5>
                 <p>{this.state.totalPendingWorkshop}</p>
               </div>
 
               <div className="card2">
-                <h1>Approvels</h1>
+                <h5>Approvels</h5>
                 <p>{this.state.totalAcceptedWorkshop}</p>
               </div>
 
               <div className="card4">
-                <h1>Rejects</h1>
+                <h5>Rejects</h5>
                 <p>{this.state.totalRejectedWorkshop}</p>
               </div>
               
@@ -298,7 +299,7 @@ render() {
           <div className="charts__left">
             <div className="charts__left__title">
               <div>
-                <h1>All Presestation</h1>
+                <h2>All Presestations</h2>
               </div>
               <i className="fa fa-usd"></i>
             </div>
@@ -373,7 +374,7 @@ render() {
           <div className="charts__left">
             <div className="charts__left__title">
               <div>
-                <h1>All Work Shops</h1>
+                <h2>All Work Shops</h2>
               </div>
               <i className="fa fa-usd"></i>
             </div>
@@ -448,13 +449,13 @@ render() {
 
           <div className="charts__left">
             <div className="charts__left__title">
-              <div>
+              <div class="container d-flex justify-content-center text-center">
                 
-                <h1>All Conferencees</h1>
+                <h2>All Conferences</h2>
               </div>
               <i className="fa fa-usd"></i>
             </div>
-            <div className="list row">
+            <div className="list row container d-flex justify-content-center">
               <div className="col-md-6">
                 <h4>Confernces List</h4>
 

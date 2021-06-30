@@ -1,24 +1,6 @@
 @import url("https://font.googleapis.com/css2?family=Lato:wgh@300;400;700&display=swap"); 
  
- /* styling scrollbars */
- ::-webkit-scrollbar {
-    height: 5px;
-    height: 6px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px #3e6e8b;
-    border-radius: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: #50665c;
-    border-radius: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #a5aaad;
-  }
+
   
   /* general styles */
   

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Card } from 'react-bootstrap';
+import LoadingSpinner from '../../../Shared/UIElements/LoadingSpinner';
 
 import './workshopsDetails.css'
 
@@ -30,7 +32,9 @@ class WorkshopsDetails extends Component {
   render() {
     return (
         <div className="container">
-        <h1>Work shops</h1>
+        <Card className="conf">
+        <h2>Work shops</h2>
+        {this.state.workshops.length === 0 && <LoadingSpinner/>}
         {this.state.workshops.length > 0 && this.state.workshops.map((workshop) => (
           <div className="card-2">
             <div>
@@ -42,6 +46,7 @@ class WorkshopsDetails extends Component {
             </div>
           </div>
         ))}
+         </Card>
           </div>
               
     )

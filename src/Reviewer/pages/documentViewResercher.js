@@ -64,9 +64,9 @@ class resercherDocument extends Component{
                     <div className="container">
                     <h1>Document</h1>       
                     <div className="card mb-3"> 
-                            <iframe src={this.state.documents.docData} alt="document" width="100%" height="750" frameBorder="0" allowFullScreen/>
-                            <h3>Doc Status: {this.state.documents.docStatus}</h3>
-                            <div className="btnAccept">
+                        <iframe src={this.state.documents.docData} alt="document" width="100%" height="750" frameBorder="0" allowFullScreen/>
+                        <h3>Doc Status: {this.state.documents.docStatus}</h3>
+                        <div className="btnAccept">
                             <div className="form-group">
                                 <Button  onClick={e => this.OnAccept(e)} value="Accepted">Accept</Button>
                             </div>
@@ -75,7 +75,7 @@ class resercherDocument extends Component{
                                 <Button onClick={e => this.OnDecline(e)} value="Rejected" className="btn btn-primary">Decline</Button>
                             </div>  
                             </div>                                 
-                    </div>    
+                        </div>    
                     </div>
                 </Card>
                 </div>

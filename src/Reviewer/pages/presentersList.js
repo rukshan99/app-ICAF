@@ -22,6 +22,7 @@ export default class userList extends Component {
         window.location = `/presenter/${userId}`
       }
 
+      
     render() {
         return (
             <div className="wrapper-users">

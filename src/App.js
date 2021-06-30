@@ -17,6 +17,10 @@ import Conference from './Admin/Components/conferenceDetails/conferenceDetails';
 import Approved from './Admin/Components/aprrovedConference/approvedConference';
 import PresentationDetails from './Admin/Components/presentationsDetails/presentationDetails';
 import WorkshopsDetails from './Admin/Components/workshopsDetails/workshopsDetails';
+import Researcher from './Reviewer/pages/researchersList';
+import WorkshopPresenter from './Reviewer/pages/presentersList'
+import researcherDocument from './Reviewer/pages/documentViewResercher';
+import presenterDocument from './Reviewer/pages/documentViewPresenter'
 
 const App = () => {
   let currentUser = null;
@@ -49,8 +53,17 @@ const App = () => {
           </Route>
           <Route path="/workshopsDetails/:id" component={WorkshopsDetails}>
           </Route>
+          <Route path="/researchersList">
+                <Researcher />
+          </Route>
+          <Route path="/workshopPresentersList">
+                <WorkshopPresenter />
+          </Route>
+          <Route path="/researcher/:id" component={researcherDocument}/>
+          <Route path="/presenter/:id" component={presenterDocument}/>
           <Redirect to="/" />
-        </Switch>
+          </Switch>
+       
       );
 
 
@@ -59,7 +72,9 @@ const App = () => {
             <MainNavigation />
             <main>{routes}</main>
             <Footer />
+          
         </Router>
+
     );
 };
 

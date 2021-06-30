@@ -11,12 +11,12 @@ const NavLinks = props => {
         return (
             <ul className="nav-links">
       <li>
-        <NavLink to="/" exact>
+        <NavLink to="/home" exact>
           Admin
         </NavLink>
       </li>
         <li>
-          <NavLink to="/editor">Editor</NavLink>
+          <NavLink to="/panel">Editor</NavLink>
         </li>
         <li>
           <NavLink to="/">Reviewer</NavLink>

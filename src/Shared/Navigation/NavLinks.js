@@ -23,7 +23,7 @@ const NavLinks = props => {
           <NavLink to="/" exact>Home</NavLink>
         </li>
         <li>
-          <NavLink to="/" exact>Admin Dashboard</NavLink>
+          <NavLink to="/admin" exact>Dashboard</NavLink>
         </li>
         <li>
           <NavLink to="/" onClick={signout} exact>Sign out</NavLink>
@@ -37,7 +37,10 @@ const NavLinks = props => {
           <NavLink to="/" exact>Home</NavLink>
         </li>
         <li>
-          <NavLink to="/">Reviewer</NavLink>
+          <NavLink to="/researchersList">Researchers</NavLink>
+        </li>
+        <li>
+          <NavLink to="/workshopPresentersList">Workshop Presenters</NavLink>
         </li>
         <li>
           <NavLink to="/" onClick={signout} exact>Sign out</NavLink>
@@ -51,7 +54,7 @@ const NavLinks = props => {
           <NavLink to="/" exact>Home</NavLink>
         </li>
         <li>
-          <NavLink to="/">Editor</NavLink>
+          <NavLink to="/editor">Dashboard</NavLink>
         </li>
         <li>
           <NavLink to="/" onClick={signout} exact>Sign out</NavLink>

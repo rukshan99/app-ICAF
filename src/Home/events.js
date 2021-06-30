@@ -14,7 +14,7 @@ class presenters extends Component {
 
     componentDidMount() {
         axios
-            .get('http://localhost:4000/editor/presentation/60d89d6de5b622029015e780')
+            .get('http://localhost:4000/api/v1/editor/presentation/60d89d6de5b622029015e780')
             .then((response) => {
                 this.setState({
                     post: response.data.data,
@@ -26,7 +26,7 @@ class presenters extends Component {
             })
 
         axios
-            .get('http://localhost:4000/editor/workshop/60d89d6de5b622029015e780')
+            .get('http://localhost:4000/api/v1/editor/workshop/60d89d6de5b622029015e780')
             .then((response) => {
                 this.setState({
                     workshop: response.data.data,

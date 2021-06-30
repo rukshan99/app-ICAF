@@ -6,7 +6,6 @@ import './css/owl.carousel.css'
 import './css/style.css'
 import Presenters from './presenters'
 import Events from './events'
-import Footer from './footer'
 import Slider from './slider'
 import Timer from './timer'
 import logo from './images/conference1.jpg'
@@ -94,10 +93,6 @@ class Home extends Component {
 
 				<div>
 					<Events />
-				</div>
-
-				<div>
-					<Footer />
 				</div>
 
 

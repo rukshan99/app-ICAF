@@ -26,7 +26,7 @@ class viewConference extends Component {
   }
 
   retrieveCOnferences() {
-    axios.get('http://localhost:4000/editor/conference')
+    axios.get('http://localhost:4000/api/v1/editor/conference')
       .then(response => {
         this.setState({
             conferences: response.data.data

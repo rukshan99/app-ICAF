@@ -56,7 +56,7 @@ class conference extends Component {
       status:this.state.status
     }
     console.log('DATA TO SEND', conference);
-    axios.post('http://localhost:4000/editor/conference', conference)
+    axios.post('http://localhost:4000/api/v1/editor/conference', conference)
     .then(response => {
       alert('Data successfully inserted')
     })

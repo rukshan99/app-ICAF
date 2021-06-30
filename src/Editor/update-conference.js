@@ -30,7 +30,7 @@ class updateconference extends Component {
   }
 
   getConference(id) {
-    axios.get(`http://localhost:4000/editor/conference/${id}`)
+    axios.get(`http://localhost:4000/api/v1/editor/conference/${id}`)
       .then(response => {
         this.setState({ 
           currentConference: response.data.data
@@ -72,7 +72,7 @@ class updateconference extends Component {
       status:this.state.currentConference.status
     }
     console.log('DATA TO SEND', conference);
-    axios.put(`http://localhost:4000/editor/conference/${this.state.currentConference._id}`, conference)
+    axios.put(`http://localhost:4000/api/v1/editor/conference/${this.state.currentConference._id}`, conference)
     .then(response => {
       alert('Data successfully Updated')
     })

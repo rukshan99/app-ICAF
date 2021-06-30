@@ -26,7 +26,7 @@ class presentation extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/editor/')
+        axios.get('http://localhost:4000/api/v1/editor/conference')
             .then(response => {
                 this.setState({ conference: response.data.data }, () => {
                     let data = [];
@@ -68,7 +68,7 @@ class presentation extends Component {
         console.log('DATA TO SEND', details);
 
         if (this.state.type === "Presentation") {
-            axios.post('http://localhost:4000/editor/presentation', details)
+            axios.post('http://localhost:4000/api/v1/editor/presentation', details)
                 .then(response => {
                     alert('Data successfully inserted')
                 })
@@ -77,7 +77,7 @@ class presentation extends Component {
                     alert('Data cannot be empty..! ' + error.message)
                 })
         } else {
-            axios.post('http://localhost:4000/editor/workshop', details)
+            axios.post('http://localhost:4000/api/v1/editor/workshop', details)
                 .then(response => {
                     alert('Data successfully inserted')
                 })

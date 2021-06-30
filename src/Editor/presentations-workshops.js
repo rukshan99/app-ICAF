@@ -32,7 +32,7 @@ class viewConference extends Component {
   }
 
   retrievePresentations(id) {
-    axios.get(`http://localhost:4000/editor/presentation/${id}`)
+    axios.get(`http://localhost:4000/api/v1/editor/presentation/${id}`)
       .then(response => {
         this.setState({
             presentations: response.data.data
@@ -45,7 +45,7 @@ class viewConference extends Component {
   }
 
   retrieveWorkshops(id) {
-    axios.get(`http://localhost:4000/editor/workshop/${id}`)
+    axios.get(`http://localhost:4000/api/v1/editor/workshop/${id}`)
       .then(response => {
         this.setState({
             workshops: response.data.data

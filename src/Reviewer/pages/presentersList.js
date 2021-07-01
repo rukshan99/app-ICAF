@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Card from '../../Shared/UIElements/Card';
+import './userList.css'
 
 export default class userList extends Component {
 
@@ -10,34 +11,32 @@ export default class userList extends Component {
     }
 
     componentDidMount() {
-
-        axios.get('http://localhost:4000/reviewer/getAllWorkshopPresenters/')
+        axios.get('http://localhost:4000/api/v1/reviewer/presenters')
         .then(response => {
              console.log('usersCollection',response.data);
         this.setState({ usersCollection: response.data.data });
         })
     }
 
+    navigateDocumentPage(e, userId) {
+        window.location = `/presenter/${userId}`
+      }
+
     render() {
         return (
             <div className="wrapper-users">
-                <div className="container">
-                    <Card className="downloadcard">
-                        <div className="container">
-                            <h1>Users</h1>
-                            {this.state.usersCollection.length > 0 && this.state.usersCollection.map((user, index) => (
-                            <div key={index} className="card mb-3">
-                                <div className="p-3" > 
-                                <h4> Name: {user.name}</h4>
-                                <h5>Email: {user.email}</h5>
-                                <h5>Role: {user.role}</h5>
-                                {/* <h6>Document: {user.document}</h6> */}
-                                </div>
+                <Card className="userList">
+                    <h1>Workshop Presenters</h1>
+                    {this.state.usersCollection.length > 0 && this.state.usersCollection.map((user, index) => (
+                        <div key={index} className="card mb-3"onClick={e => this.navigateDocumentPage(e, user._id)}>
+                            <div className="p-3" >                             
+                            <h4> Name: {user.name}</h4>
+                            <h4>Email: {user.email}</h4>
+                            <h4>Role: {user.role}</h4> 
                             </div>
-                            ))}
                         </div>
-                    </Card>
-                </div>
+                        ))}
+                </Card>
             </div>
         )
     }

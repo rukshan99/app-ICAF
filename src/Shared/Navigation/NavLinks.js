@@ -14,11 +14,22 @@ const signout = () => {
   window.location.reload(true);
 }
 
+<<<<<<< HEAD
+    if(!auth) {
+        return (
+            <ul className="nav-links">
+      <li>
+        <NavLink to="/admin" exact>
+          Admin
+        </NavLink>
+      </li>
+=======
 const NavLinks = props => {
   authenticationService.currentUser.subscribe(user => currentUser = user);
   if(currentUser && currentUser._doc.role === Role.Admin) {
     return (
       <ul className="nav-links">
+>>>>>>> dev-v1
         <li>
           <NavLink to="/" exact>Home</NavLink>
         </li>

@@ -5,6 +5,13 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 
 import MainNavigation from './Shared/Navigation/MainNavigation';
 import SignIn from './User/pages/SignIn';
+import Panel from './Editor/panel';
+import Conference from './Editor/create-conference';
+import ViewConference from './Editor/view-conference';
+import UpdateConference from './Editor/update-conference';
+import Workshops from './Editor/presentations-workshops';
+import Home from './Home/home';
+import Presentation from './Editor/presentation';
 import Profile from './User/pages/profile';
 
 import { Role } from './_helpers/role';
@@ -27,6 +34,7 @@ const App = () => {
   authenticationService.currentUser.subscribe(user => currentUser = user);
     const routes = currentUser ? (
         <Switch>
+           <Route path="/"   component={Home} exact>
           <Route path="/downloads" exact>
             <Downloads />
           </Route>
@@ -41,6 +49,24 @@ const App = () => {
           <Route path="/auth">
                 <SignIn />
           </Route>
+          <Route path="/editor">
+               <Panel/>
+          </Route>
+          <Route path="/conference">
+               <Conference/>
+          </Route>
+          <Route path="/viewConferences">
+               <ViewConference/>
+          </Route>
+          <Route path="/updateConference/:id"   component={UpdateConference}>
+          </Route>
+          <Route path="/presentation">
+               <Presentation/>
+          </Route>
+          <Route path="/workshops/:id"   component={Workshops}>
+          </Route>
+          <Route path="/user11/research">
+                <ResearchPaper />
           <Route path="/admin">
                 <Dashboard />
           </Route>

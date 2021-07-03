@@ -1,61 +1,96 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-//import { AuthContext } from '';
+import { Role } from '../../_helpers/role';
+import { authenticationService } from '../../services/authentication-service';
+import { history } from '../../_helpers/history';
 import './NavLinks.css';
 
-const NavLinks = props => {
-    const auth = "";// useContext(AuthContext);
+let currentUser = null;
 
-    if(!auth) {
-        return (
-            <ul className="nav-links">
-      <li>
-        <NavLink to="/home" exact>
-          Admin
-        </NavLink>
-      </li>
+const signout = () => {
+  authenticationService.signout();
+  history.push('/auth');
+  window.location.reload(true);
+}
+
+const NavLinks = props => {
+  authenticationService.currentUser.subscribe(user => currentUser = user);
+  if(currentUser && currentUser._doc.role === Role.Admin) {
+    return (
+      <ul className="nav-links">
         <li>
-          <NavLink to="/editor">Editor</NavLink>
+          <NavLink to="/" exact>Home</NavLink>
+        </li>
+        <li>
+          <NavLink to="/" exact>Admin Dashboard</NavLink>
+        </li>
+        <li>
+          <NavLink to="/" onClick={signout} exact>Sign out</NavLink>
+        </li>
+      </ul>
+    );
+  } else if(currentUser && currentUser._doc.role === Role.Reviewer) {
+    return (
+      <ul className="nav-links">
+        <li>
+          <NavLink to="/" exact>Home</NavLink>
         </li>
         <li>
           <NavLink to="/">Reviewer</NavLink>
         </li>
         <li>
-          <NavLink to="/">User</NavLink>
+          <NavLink to="/" onClick={signout} exact>Sign out</NavLink>
+        </li>
+      </ul>
+    );
+  } else if(currentUser && currentUser._doc.role === Role.Editor) {
+    return (
+      <ul className="nav-links">
+        <li>
+          <NavLink to="/" exact>Home</NavLink>
+        </li>
+        <li>
+          <NavLink to="/">Editor</NavLink>
+        </li>
+        <li>
+          <NavLink to="/" onClick={signout} exact>Sign out</NavLink>
+        </li>
+      </ul>
+    );
+  } else if(currentUser && currentUser._doc.role) {
+    return (
+      <ul className="nav-links">
+        <li>
+          <NavLink to="/" exact>Home</NavLink>
+        </li>
+        <li>
+          <NavLink to="/downloads">Download</NavLink>
+        </li>
+        <li>
+          <NavLink to="/profile">Account</NavLink>
+        </li>
+        <li>
+          <NavLink to="/" onClick={signout} exact>Sign out</NavLink>
+        </li>
+      </ul>
+    );
+  } else {
+    return (
+      <ul className="nav-links">
+        <li>
+          <NavLink to="/" exact>Home</NavLink>
+        </li>
+        <li>
+        <NavLink to="/downloads">Download</NavLink>
         </li>
         <li>
           <NavLink to="/auth">Sign in</NavLink>
         </li>
-    </ul>
-        );
-    }
-// else {
-//   return (
-//     <ul className="nav-links">
-//       <li>
-//         <NavLink to="/" exact>
-//           Users
-//         </NavLink>
-//       </li>
-//       {auth.isSignedIn && (
-//         <li>
-//           <NavLink to={`/${auth.userId}/`}></NavLink>
-//         </li>
-//       )}
-//       {auth.isSignedIn && (
-//         <li>
-//           <NavLink to="></NavLink>
-//         </li>
-//       )}
-//       {!auth.isSignedIn && (
-//         <li>
-//           <NavLink to="/auth">Sign in</NavLink>
-//         </li>
-//       )}
-//     </ul>
-//   );
-//       }
+      </ul>
+    );
+  }
+
 };
 
 export default NavLinks;

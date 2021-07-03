@@ -10,6 +10,10 @@ import { PrivateRoute } from './_helpers/private-route';
 import { authenticationService } from './services/authentication-service';
 import Footer from './Shared/Footer/footer';
 import Downloads from './downloads/downloads';
+import Researcher from './Reviewer/pages/researchersList';
+import WorkshopPresenter from './Reviewer/pages/presentersList'
+import researcherDocument from './Reviewer/pages/documentViewResercher';
+import presenterDocument from './Reviewer/pages/documentViewPresenter'
 
 const App = () => {
   let currentUser = null;
@@ -30,8 +34,17 @@ const App = () => {
           <Route path="/auth">
                 <SignIn />
           </Route>
+          <Route path="/researchersList">
+                <Researcher />
+          </Route>
+          <Route path="/workshopPresentersList">
+                <WorkshopPresenter />
+          </Route>
+          <Route path="/researcher/:id" component={researcherDocument}/>
+          <Route path="/presenter/:id" component={presenterDocument}/>
           <Redirect to="/" />
-        </Switch>
+          </Switch>
+       
       );
 
     return (
@@ -39,7 +52,9 @@ const App = () => {
             <MainNavigation />
             <main>{routes}</main>
             <Footer />
+          
         </Router>
+
     );
 };
 

@@ -1,6 +1,8 @@
 # International Conference on Application Frameworks (ICAF)
 #### React JS frontend of the conference management tool for ICAF
 
+**Refer the [documentation](http://rukshanjayasekara.me/docs-ICAF) for more information. (Includes the user guide and the developer guide)**
+
 ## Getting Started
 
 ### `git clone https://github.com/rukshan99/app-ICAF.git`
